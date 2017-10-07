@@ -1,5 +1,3 @@
-<link rel="shortcut icon" type="image/png" href="{{site.url}}/favicon.png">
-
 # Alexandr Savinov
 
 ## Profiles
