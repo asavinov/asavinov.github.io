@@ -2,10 +2,10 @@
 
 # Alexandr Savinov
 
-## Links to profiles
+## Profiles
 
 #### Academic
-* ResearchGate: http://www.researchgate.net/profile/Alexandr_Savinov/
+* ResearchGate: <http://www.researchgate.net/profile/Alexandr_Savinov/>
 * Google Scholar: http://scholar.google.com/citations?user=sgGY5kEAAAAJ
 * DBLP: http://www.informatik.uni-trier.de/~ley/pers/hd/s/Savinov:Alexandr_A=
 * Microsoft Academic Search: http://academic.research.microsoft.com/Author/77738/alexandr-savinov
