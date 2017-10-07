@@ -1,4 +1,5 @@
 ---
+title: About Alexandr Savinov
 redirect_from: "/savinov/"
 ---
 
