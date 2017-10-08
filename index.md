@@ -1,5 +1,6 @@
 ---
 title: Alexandr Savinov
+layout: default
 redirect_from: "/savinov/"
 ---
 
