@@ -1,8 +1,8 @@
 # Site settings
 title: Alexandr Savinov
-highlighter: rouge
 theme: jekyll-theme-slate
-show_downloads: true
+#show_downloads: true
 #google_analytics:
+#highlighter: rouge
 plugins:
   - jekyll-redirect-from

@@ -1,0 +1,1256 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type"
+content="text/html; charset=iso-8859-1">
+<meta name="Author" content="Alexandr A. Savinov">
+<meta name="Description"
+content="We present a new algorithm, called Optimist, which generates possibilistic set-valued rules from tables containing categorical attributes taking a finite number of values. An example of such a rule might be &#147;IF HOUSEHOLDSIZE={Two OR Tree} AND OCCUPATION={Professional OR Clerical} THEN PAYMENT_METHOD={CashCheck (Max=249) OR DebitCard (Max=175)}. The algorithm is based on an original formal framework generalising the conventional boolean approach in two directions: (i) finite-valued variables and (ii) continuos-valued semantics. Using this formalism we approximate the multidimensional distribution induced from data by a number of possibilistic prime disjunctions (patterns) representing the widest intervals of impossible combinations of values. The Optimist algorithm described in the paper generates the most informative prime disjunctions for one pass through the data set by means of transformation from the DNF representing data into the possibilistic CNF representing knowledge. It consists of generation, absorption and filtration parts. The set-valued rules built from the possibilistic patterns are optimal in the sense that they have the most general condition and the most specific conclusion. For the case of finite-valued attributes and two-valued semantics the algorithm is implemented in the Chelovek rule induction system for Windows 95.">
+<meta name="ID" content="paper-33">
+<meta name="KeyWords"
+content="Data Mining, Rule induction, Set-Valued Rules, Prime Disjunctions, Optimist Algorithm">
+<meta name="Template"
+content="C:\Program Files\Microsoft Office\Templates\sv-lncs.dot">
+<meta name="GENERATOR" content="Microsoft FrontPage Express 2.0">
+<title>An Algorithm for Induction of Possibilistic Set-Valued Rules by Finding Prime Disjunctions</title>
+
+<!-- Google Analytics counter -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-43712358-2', 'conceptoriented.org');
+  ga('send', 'pageview');
+</script>
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript">(function (d, w, c) { (w[c] = w[c] || []).push(function() { try { w.yaCounter22211935 = new Ya.Metrika({id:22211935, clickmap:true, trackLinks:true, accurateTrackBounce:true}); } catch(e) { } }); var n = d.getElementsByTagName("script")[0], s = d.createElement("script"), f = function () { n.parentNode.insertBefore(s, n); }; s.type = "text/javascript"; s.async = true; s.src = (d.location.protocol == "https:" ? "https:" : "http:") + "//mc.yandex.ru/metrika/watch.js"; if (w.opera == "[object Opera]") { d.addEventListener("DOMContentLoaded", f, false); } else { f(); } })(document, window, "yandex_metrika_callbacks");</script><noscript><div><img src="//mc.yandex.ru/watch/22211935" style="position:absolute; left:-9999px;" alt="" /></div></noscript><!-- /Yandex.Metrika counter -->
+
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000">
+
+<h2 align="center">AN ALGORITHM FOR INDUCTION OF POSSIBILISTIC
+SET-VALUED RULES BY FINDING PRIME DISJUNCTIONS </h2>
+
+<p align="center"><em><strong>Alexandr A. Savinov <br>
+</strong></em><a href="http://www.gmd.de/"><em><strong>GMD</strong></em></a><em><strong>
+-- German National Research Center for Information Technology <br>
+</strong></em><a href="http://ais.gmd.de/KD/"><em><strong>AiS.KD</strong></em></a><em><strong>
+-- Autonomous Intelligent Systems Institute, Knowledge Discovery
+Team <br>
+Schloss Birlinghoven, Sankt-Augustin, D-53754 Germany <br>
+Tel: +49-2241-142629, Fax: +49-2241-142072 <br>
+E-mail: </strong></em><a href="mailto:savinov@gmd.de"><em><strong>savinov@gmd.de</strong></em></a><em><strong>,
+</strong></em><a href="http://ais.gmd.de/~savinov/"><em><strong>http://ais.gmd.de/~savinov/</strong></em></a>
+</p>
+
+<h3 align="center"><em><strong>Abstract </strong></em></h3>
+
+<blockquote>
+    <p><i>We present a new algorithm, called Optimist, which
+    generates possibilistic set-valued rules from tables
+    containing categorical attributes taking a finite number of
+    values. An example of such a rule might be &#147;IF
+    HOUSEHOLDSIZE={Two OR Tree} AND OCCUPATION={Professional OR
+    Clerical} THEN PAYMENT_METHOD={CashCheck (Max=249) OR
+    DebitCard (Max=175)}. The algorithm is based on an original
+    formal framework generalising the conventional boolean
+    approach in two directions: (i) finite-valued variables and (ii)
+    continuos-valued semantics. Using this formalism we
+    approximate the multidimensional distribution induced from
+    data by a number of possibilistic prime disjunctions (patterns)
+    representing the widest intervals of impossible combinations
+    of values. The Optimist algorithm described in the paper
+    generates the most interesting prime disjunctions for one
+    pass through the data set by means of transformation from the
+    DNF representing data into the possibilistic CNF representing
+    knowledge. It consists of generation, absorption and
+    filtration parts. The set-valued rules built from the
+    possibilistic patterns are optimal in the sense that they
+    have the most general condition and the most specific
+    conclusion. For the case of finite-valued attributes and two-valued
+    semantics the algorithm is implemented in the Chelovek rule
+    induction system for Windows 95. </i></p>
+</blockquote>
+
+<h2>1. Introduction </h2>
+
+<p>The field of knowledge discovery in databases or data mining
+has been paid a lot of attention during recent years as large
+organisations has accumulated huge databases and begun to realise
+the potential value of the information that is stored their. One
+specific data mining task is the mining of dependencies in the
+form of rules. The task is to determine hidden patterns that
+characterise the problem domain behaviour from a large database
+of previous records and then to represent them in the form of
+rules. The rules can then be used either for description or for
+prediction purposes. </p>
+
+<p>The problem of rule induction can be stated as follows: given
+a database consisting of a number of records, where each record
+is a sequence of attribute values; find rules which by their
+conditions select wide intervals in the multidimensional space
+where the distribution of values in conclusion is highly
+inhomogeneous, i.e., contains large quantity of information. In
+the case where variables in condition and conclusion of such
+rules may take only one value we obtain well known association
+rules [1-3], e.g.: </p>
+
+<blockquote>
+    <p>IF <i>x</i><sub>1</sub>=<em>a</em><sub>13</sub> AND <em>x</em><sub>2</sub>=<em>a</em><sub>25</sub>
+    THEN <em>x</em><sub>3</sub>=<em>a</em><sub>32</sub> (Support=<em>s</em>,
+    Confidence=<em>c</em>) </p>
+</blockquote>
+
+<p>If the variables are allowed to take as a value any subset of
+the domain then we obtain so called set-valued rules having the
+form: </p>
+
+<blockquote>
+    <p>IF <em>x</em><sub>1</sub>={<em>a</em><sub>13</sub>, <em>a</em><sub>14</sub>}
+    AND <em>x</em><sub>2</sub>={<em>a</em><sub>21</sub>, <em>a</em><sub>27</sub>}
+    THEN <em>x</em><sub>3</sub>={<em>a</em><sub>33</sub>, <em>a</em><sub>36</sub>}
+    </p>
+</blockquote>
+
+<p>Here <em>a</em><sub><em>ij</em></sub> are values of the <em>i</em>-th
+variable. Each variable in such a rule may take any value from
+the corresponding subset, e.g., <em>x</em><sub>1</sub> may be
+equal to either <em>a</em><sub>13</sub> or <em>a</em><sub>14</sub>.
+</p>
+
+<p>In the paper we consider the problem of mining set-valued
+rules where all variables have a finite number of values, the
+universe of discourse is equal to the Cartesian product of all
+sets of the values, and the semantics is represented by a
+frequency distribution over the universe of discourse (the number
+of observations that belong to each point). The condition of such
+rules selects a subspace in the form of conjunctive interval
+within the universe of discourse. Then the conclusion
+consolidates all information about the problem domain from this
+subspace by projecting the semantics restricted within this
+interval onto the goal variable. The problem is that the number
+of all possible conjunctive intervals of the multidimensional
+space is extremely large and it is necessary to have some
+criterion of interestingness for the rules. One obvious criterion
+is that the more general the rule condition is, i.e., the larger
+interval it selects is, the more interesting the rule is. However,
+if we take too general interval and use it for the rule condition,
+it may well happen that the rule will not be interesting since
+the conclusion is not surprising, i.e., it does not contain much
+information. For example, the rule </p>
+
+<blockquote>
+    <p>IF <em>x</em><sub>1</sub>={<em>a</em><sub>13</sub>, <em>a</em><sub>14</sub>}
+    THEN <em>x</em><sub>3</sub>={<em>a</em><sub>31</sub> (Max=151),
+    <em>a</em><sub>32</sub> (Max=152), <em>a</em><sub>33</sub> (Max=153)}
+    </p>
+</blockquote>
+
+<p>is not interesting since it says that under these conditions
+the variable <em>x</em><sub>3</sub> takes any of its 3 values
+with approximately the same possibility (almost constant
+possibility distribution in conclusion does not bear much
+information and hence the conclusion does not impose real
+constraints on the values of the goal variable). On the other
+hand, the rule </p>
+
+<blockquote>
+    <p>IF <em>x</em><sub>1</sub>={<em>a</em><sub>13</sub>, <em>a</em><sub>14</sub>}
+    THEN <em>x</em><sub>3</sub>={<em>a</em><sub>31</sub> (Max=151),
+    <em>a</em><sub>32</sub> (Max=0), <em>a</em><sub>33</sub> (Max=49)}
+    </p>
+</blockquote>
+
+<p>is much more interesting (informative) since it says that,
+contrary to our expectations, the value <em>a</em><sub>32</sub>
+is absolutely impossible within this interval while the value <em>a</em><sub>33</sub>
+has much less possibility than <em>a</em><sub>31</sub>. Thus
+informally, the more general the rule condition is (the wider the
+interval selected by the condition) and the more specific the
+conclusion is (the closer the conclusion is to the singular form)
+the more interesting the rule is. Thus for assessing rules we
+proceed from the criterion of informative interestingness rather
+than from their classification power in relation to some target
+attribute. In particular, we do not impose constraints onto the
+choice of the target attribute or the form of the conclusion --
+the main criterion is the quantity of information (or generally
+the interestingness) rather than the form of representation. </p>
+
+<p>To find such maximally general in condition and specific in
+conclusion rules we use an approach according to which any
+multidimensional possibility distribution can be formally
+represented by a set of special logical constructions called
+possibilistic disjunctions. Each such disjunction is made up of
+several one-dimensional possibility distributions (propositions
+in logical terms) over the values of individual variables
+combined with the operation OR (interpreted as maximum) and
+represents some distribution over the universe of discourse (the
+disjunction semantics). One disjunction cannot represent any
+multidimensional possibility distribution but it can represent it
+within some interval of this space where it sets maximal possible
+values the whole distribution may take. With the help of a set of
+disjunctions combined with the operation AND (interpreted as
+minimum) we can represent any multidimensional distribution by
+approximating it separately within various intervals (generalisation
+of CNF). Thus any one disjunction sets an upper bound for the
+distribution in some subspace while the overall semantics is
+equal to the sum of these constraints, i.e., the overall
+distribution is pressed down by individual disjunctions (Fig.&nbsp;1).
+</p>
+
+<p align="center"><img src="wsc4_1.gif"
+alt="Fig. 1. The data set semantics is approximated by a number of disjunctions which upper bound the multidimensional distribution induced from data."
+width="646" height="213"> </p>
+
+<p align="center"><em><strong>Fig. 1.</strong></em><em> The data
+set semantics is approximated by a number of disjunctions which
+upper bound the multidimensional distribution induced from data. </em></p>
+
+<p>The distribution itself is initially represented by singular
+conjunctions combined with the connective OR and lower bounding
+the distribution surface (generalisation of DNF). Each such
+conjunction corresponds to one record (one combination of
+attribute values) along with the number of its occurrences. This
+extensional representation can be intensionalised by merging
+singular conjunctions into more general ones, which lower bound
+the distribution within wide intervals instead of only one point.
+Conceptually this approach is applied in many existing rule
+induction algorithms. Our algorithm is based on the dual approach
+where the initial representation is transformed into its dual
+intensional form, i.e., the set of singular conjunctions is
+transformed into the set of general disjunctions (Fig. 1). </p>
+
+<p>Obviously, only the disjunctions, which follow from the
+initial distribution, can be used to represent it. For example,
+disjunctions <b>d</b>, <b>u</b>, <b>v</b>, <b>w</b> follow from
+the multidimensional distribution shown in Fig.&nbsp;1 as bold
+line. Although all these disjunctions can be used to represent
+the semantics and to form rules, some of them are not interesting
+since they impose too weak constraints, which are weaker than
+those imposed by some other disjunctions. For example, it makes
+no sense to use the disjunction <b>d</b> for representation since
+it follows from <b>v</b> (Fig. 1,2). Moreover, if we have <b>v</b>
+then we can always build from it all weaker disjunctions
+including <b>d</b>. Thus we come to a very important notion of
+prime disjunction: the disjunction is said to be prime if it does
+not follow from any other disjunction (except for itself). Note
+that prime disjunctions are always defined in relation to some
+distribution for which they are the strongest. </p>
+
+<p>The key point of the proposed rule induction algorithm is that
+we generate possibilistic prime disjunctions for the semantics
+represented by a set of records and then transform these
+disjunctions into the form of rules. Since prime disjunctions
+cannot be strengthened (they by definition impose the strongest
+constraints) both our criteria -- maximal generality of condition
+and maximal specificity of conclusion -- are reached when
+building rules. The prime disjunctions themselves are also
+interesting since they can be interpreted as negative
+associations, i.e., they intensionally represent the intervals in
+the universe of discourse where combinations of values have low
+degree of possibility (intervals of incompatible attribute values).
+</p>
+
+<p>For real world problems the number of prime disjunctions is
+very high so we have to find only the most informative of them, i.e.,
+those, which represent wide negative intervals. For example, the
+disjunction <b>w</b> in Fig.&nbsp;1 and 2 is not informative (although
+it is prime) since it represents very specific information about
+only one point. In many cases such disjunctions can be
+interpreted as noise or exceptions and should not be generated
+during the induction process (the obtained rules will be very
+specific). </p>
+
+<p align="center"><img src="wsc4_2.gif"
+alt="Fig. 2. Search in the space of all disjunctions. "
+width="553" height="256"></p>
+
+<p align="center"><em><b>Fig. 2.</b></em><em> Search in the space
+of all disjunctions. </em></p>
+
+<p>In [4] an approach to mining set-valued rules based on a
+generalised covering technique was proposed. However it has one
+big disadvantage that the whole data set has to be in memory to
+reflect the state of the cover. In this paper we propose another
+algorithm, called Optimist, which builds all prime disjunctions
+simultaneously while processing all records in succession.
+Formally, it uses an explicit transformation of possibilistic DNF
+representing data into CNF consisting of prime disjunctions (knowledge).
+An advantage is that the set of prime disjunctions is built for
+one pass through the data set. The algorithm assumes that at each
+moment the semantics is equal to the number of processed records
+and the current set of prime disjunctions is updated each time
+new record is processed (Fig.&nbsp;2). At the very beginning
+there are no prime disjunctions since no conjunctions are
+processed. After the first step the set of prime disjunctions is
+semantically equivalent to the first conjunction which has been
+processed. Then the set of prime disjunctions is equivalent to
+two data elements and so on. Thus at each step all current prime
+disjunctions are updated so that they include the semantics of
+one more data element. To keep the set of prime disjunctions
+tractable the most specific of them are removed since they are
+not interesting and cannot be generalised (the process goes from
+general to specific disjunctions). </p>
+
+<p>Prime disjunctions can be regarded as a sort of patterns
+representing significant multidimensional regularities
+characteristic of the possibility distribution. Once the set of
+interesting patterns has been found they can be used to form
+rules by inverting the propositions about variables which should
+be in condition part. The only problem here is that we obtain
+possibilistic conditions, which are not very comprehensible and
+should be transformed into the conventional crisp form. As a
+result we might obtain the following rule: </p>
+
+<blockquote>
+    <p>IF <em>x</em><sub>1</sub>={<em>a</em><sub>12</sub>, <em>a</em><sub>15</sub>}
+    THEN <em>x</em><sub>3</sub>={<em>a</em><sub>31</sub> (Max=151),
+    <em>a</em><sub>33</sub> (Max=49)} </p>
+</blockquote>
+
+<p>where (as well as in the whole paper) absent values are
+supposed to have the degree of possibility 0 and the weight Max=151
+means that within this condition interval the corresponding value
+occurs maximally 151 times. Note that if we built rules in the
+form of prime conjunctions then the weight would be interpreted
+dually as the necessity degree, e.g., Min=37 (and the condition
+intervals would be different). Since this rule is built from
+prime disjunction it is guaranteed that the condition cannot be
+generalised (strengthened) without generalising the conclusion
+and vice versa, the conclusion cannot be made more specific since
+it is an exact possibilistic projection of the distribution from
+the condition interval onto the goal variable. Once such rules
+have been found it is easy to fill them with other semantics, e.g.,
+the sum of observations. Then the rule might look like </p>
+
+<blockquote>
+    <p>IF <em>x</em><sub>1</sub>={<em>a</em><sub>12</sub>, <em>a</em><sub>15</sub>}
+    THEN <em>x</em><sub>3</sub>={<em>a</em><sub>31</sub> (Max=151,
+    Sum=753), <em>a</em><sub>33</sub> (Max=49, Sum=238)} </p>
+</blockquote>
+
+<p>The notion of prime disjunction (conjunction, implicant etc.)
+and algorithms for finding them has received a lot of attention
+in various fields, especially in classical cybernetics (generation
+of prime implicants [5]) and combinatorics. In particular, the
+notion of prime implicant has been successfully used for
+efficient mining association rules [6,7] by finding maximum
+frequent itemsets. In this paper, however, we use this notion in
+an original possibilistic form generalising the conventional
+boolean analogue onto the case of (i) finite-valued variables (instead
+of only two values 0 and 1), and (ii) continuos-valued semantics
+(instead of only true and false). </p>
+
+<p>For representing data and knowledge we use a so called method
+of sectioned vectors and matrices originating from the paper [8]
+and later generalised onto fuzzy case [9]. The idea of
+transformation from fuzzy DNF into fuzzy CNF and finding rules
+was proposed in [10]. A fuzzy version of this rule induction
+algorithm, which is based on the covering method, was described
+in [4]. </p>
+
+<h2>2. Data and Knowledge Representation </h2>
+
+<p>Let some problem domain at the syntactic level be described by
+a finite number of <i>variables</i> or <i>attributes</i> <em>x</em><sub>1</sub>,
+<em>x</em><sub>2</sub>,..., <em>x</em><sub><em>n</em></sub> each
+of which takes a finite number of <i>values</i> and corresponds
+to one column of data table: </p>
+
+<blockquote>
+    <p><em>x</em><sub><em>i</em></sub> \in <em>A</em><sub><em>i</em></sub>
+    = {<em>a</em><sub><em>i</em>1</sub>, <em>a</em><sub><em>i</em>2</sub>,...,
+    <em>a</em><sub><em>in</em></sub><sub><sub><em>i</em></sub></sub>},
+    <em>i</em>=1,2,...,<em>n</em> </p>
+</blockquote>
+
+<p>where <em>n</em><sub><em>i</em></sub> is the number of values
+of the <i>i</i>-th variable and <em>A</em><sub><em>i</em></sub>
+is its set of values. The <i>state space</i> or the <i>universe
+of discourse</i> is defined as the Cartesian product of all sets
+of the values: <em>O</em>=<em>A</em><sub><em>1</em></sub> \times <em>A</em><sub><em>2</em></sub>
+\times ... \times <em>A</em><sub><em>n</em></sub>. The universe
+of discourse is a finite set with the structure of a
+multidimensional space. Each syntactic object (state) from the
+universe of discourse is represented by a combination of values
+of all variables: <em>o</em>=&lt;<em>x</em><sub>1</sub>, <em>x</em><sub>2</sub>,...,
+<em>x</em><sub><em>n</em></sub>&gt; \in <em>O</em>. The number of
+such objects is equal to the power of the universe of discourse:
+|<em>O</em>|=<em>n</em><sub>1</sub> \times <em>n</em><sub>2</sub>
+\times ... \times <em>n</em><sub><em>n</em></sub>. </p>
+
+<p>Formally the problem domain <i>semantics</i> is represented by
+a frequency distribution over the state space, i.e., a natural
+number or 0 (the number of observations) is assigned to each
+combination of attribute values (syntactic object). The frequency
+0 is interpreted as the absolute impossibility of the
+corresponding object while all positive numbers are interpreted
+as various degrees of possibility. If we map this distribution
+into the continuous interval [0,1] then 1 is interpreted as an
+uncertainty, complete possibility. The absence of information
+means that the distribution is equal to 1 in any point of the
+universe of discourse, while the more information we have the
+lower the distribution is, i.e., some points are impossible (disabled,
+prohibited). Thus the possibilistic interpretation has negative
+meaning. Yet for the problem of rule induction it is simpler to
+work directly with frequencies interpreted as possibilities so we
+will not use the mapping into [0,1]. Note that there is also the
+dual (positive) interpretation where 0 is absolute uncertainty
+while positive frequencies represent a degree of necessity. </p>
+
+<p>We will use a special technique of sectioned vectors and
+matrixes to represent the semantics. Each construction of this
+mechanism along with interpretation rules imposes constraints of
+certain form on possible combinations of attribute values.
+Depending on the logical connective used in combining these
+constructions they bound either minimal or maximal values. The
+sectioned constructions are written in bold font with the two
+lower indexes corresponding to the number of variable and to the
+number of value, respectively. </p>
+
+<p>The <i>component </i><strong>u</strong><sub><em>ij</em></sub>
+of the sectioned vector <strong>u</strong> is a natural number
+assigned to <i>j</i>-th value of <i>i</i>-th variable. The <i>section</i>
+<strong>u</strong><sub><em>i</em></sub> of the sectioned vector <strong>u</strong>
+is an ordered sequence of <em>n</em><sub><em>i</em></sub>
+components assigned to <i>i</i>-th variable and representing some
+distribution over all values of one variable. For example, <strong>u</strong><sub><em>i</em></sub>={7,0,83}
+means that three values of the <i>i</i>-th variable have
+frequencies 7, 0, and 83. The sectioned <i>vector</i> <strong>u</strong>
+is an ordered sequence of <i>n </i>sections for all variables.
+Thus the total number of components in sectioned vector is equal
+to <em>n</em><sub>1</sub>+<em>n</em><sub>2</sub>+...+<em>n</em><sub><em>n</em></sub>.
+For example, the constructions 01.567.0090 and {0,1}.{5,6,7}.{0,0,9,0}
+represent the same sectioned vector written in different ways (with
+sections separated by dots). The sectioned <i>matrix</i> consists
+of a number of sectioned vectors written as its lines. </p>
+
+<p>Each section represents an elementary proposition about the
+corresponding variable by assigning degrees of possibility to its
+values while the whole vector can be interpreted either as
+conjunction or as disjunction. If the sectioned vector <strong>k</strong>
+is interpreted as conjunction then it defines the distribution,
+which is equal to the minimum of the vector components
+corresponding to the point coordinates: </p>
+
+<blockquote>
+    <p><strong>k</strong>(<em>o</em>) = <strong>k</strong>(&lt;<em>x</em><sub>1</sub>,
+    <em>x</em><sub>2</sub>,..., <em>x</em><sub><em>n</em></sub>&gt;)
+    = <strong>k</strong><sub>1</sub>(<em>x</em><sub>1</sub>) AND <strong>k</strong><sub>2</sub>(<em>x</em><sub>2</sub>)
+    AND ... AND <strong>k</strong><sub><em>n</em></sub>(<em>x</em><sub><em>n</em></sub>)
+    = min <strong>k</strong><sub><em>i</em></sub>(<em>x</em><sub><em>i</em></sub>),
+    <em>i</em>=1,2,...,<em>n</em> </p>
+</blockquote>
+
+<p>(The minimum is taken among <i>n</i> components -- one from
+each section.) If the sectioned vector <strong>d</strong> is
+interpreted as disjunction then it defines the distribution,
+which is equal to the maximum of the vector components
+corresponding to the point coordinates: </p>
+
+<blockquote>
+    <p><strong>d</strong>(<em>o</em>) = <strong>d</strong>(&lt;<em>x</em><sub>1</sub>,
+    <em>x</em><sub>2</sub>,..., <em>x</em><sub><em>n</em></sub>&gt;)
+    = <strong>d</strong><sub>1</sub>(<em>x</em><sub>1</sub>) OR <strong>d</strong><sub>2</sub>(<em>x</em><sub>2</sub>)
+    OR ... OR <strong>d</strong><sub><em>n</em></sub>(<em>x</em><sub><em>n</em></sub>)
+    = min <strong>d</strong><sub><em>i</em></sub>(<em>x</em><sub><em>i</em></sub>),
+    <em>i</em>=1,2,...,<em>n</em> </p>
+</blockquote>
+
+<p>Sectioned matrixes are analogues of the conventional DNF and
+CNF depending on their interpretation. If the matrix <strong>K</strong>
+is interpreted as DNF then its sectioned vector-lines are
+combined with the connective OR and interpreted as conjunctions (disjunction
+of conjunctions). In the dual way, if the matrix <strong>D</strong>
+is interpreted as CNF then its sectioned vector-lines are
+combined with the connective AND and interpreted as disjunctions
+(conjunction of disjunctions). Thus DNF/CNF defines the
+distribution which is equal to the maximum/minimum of the
+distributions represented by its lines. </p>
+
+<p>The data can be easily represented in the form of DNF so that
+each conjunction represents one record along with the number of
+its occurrences in the data set. The conjunction corresponding to
+one record consists of all 0&#146;s except for one component in
+each section, which is equal to the number of record occurrences.
+For example, conjunction {5,0} AND {5,0,0} AND {5,0,0,0} or
+shortly 50.500.5000 represents the distribution value in the
+point <em>o</em>=&lt;<em>a</em><sub>11</sub>, <em>a</em><sub>21</sub>,...,
+<em>a</em><sub>31</sub>&gt; where it equals 5. </p>
+
+<p>One distribution is said to be a <i>consequence</i> of another
+if it <i>covers</i> the second distribution, i.e., its values in
+all points of the universe of discourse are greater than or equal
+to the values of the second distribution. The consequence
+relation for conjunctions, disjunctions, DNF, CNF and other
+representation constructions is defined as the consequence
+relation for the corresponding distributions. </p>
+
+<p>The operation of <i>elementary induction</i> consists in
+increasing one component of a disjunction so that it becomes
+weaker. Since one component corresponds to one dimension in the
+space of all vectors this operation can be used to search through
+this space by moving along separate dimensions, e.g., to find
+some interesting patterns. </p>
+
+<p>By dependency we mean any information restricted by a <i>simple</i>
+form of representation. In our approach we consider dependencies
+in the form of possibilistic disjunctions which are thought of as
+<i>patterns</i> representing the distribution regularities. The
+disjunction is referred to as <i>prime</i> if it is a consequence
+of the distribution but is not a consequence of any other
+disjunction except for itself. Thus prime disjunctions are the
+strongest among those which follow from the distribution. In
+particular, any other disjunction can be obtained from a prime
+one by weakening (increasing) its components. On the other hand,
+if any component of prime disjunction is decreased then it
+already is not a consequence of the distribution. Thus formally
+the problem of finding dependencies in our case is reduced to the
+problem of generating possibilistic prime disjunctions given a
+distribution represented extensionally by a number of
+conjunctions. </p>
+
+<h2>3. Search for Possibilistic Patterns </h2>
+
+<h3>3.1. Generation of Disjunctions </h3>
+
+<p>To add the conjunction <strong>k</strong> to the matrix of CNF
+<strong>D</strong> it is necessary to add it to all <i>m</i>
+disjunctions of the matrix: </p>
+
+<blockquote>
+    <p><strong>k</strong> OR <strong>D</strong> = <strong><br>
+    k</strong> OR (<strong>d</strong><sup>1</sup> AND <strong>d</strong><sup>2</sup>
+    AND ... AND <strong>d</strong><sup><em>m</em></sup>) = <br>
+    (<strong>k</strong> OR <strong>d</strong><sup>1</sup>) AND (<strong>k</strong>
+    OR <strong>d</strong><sup>2</sup>) AND ... AND (<strong>k</strong>
+    OR <strong>d</strong><sup><em>m</em></sup>) </p>
+</blockquote>
+
+<p>Addition of conjunction to disjunction is carried out by the
+formula: </p>
+
+<blockquote>
+    <p><strong>k</strong> OR <strong>d</strong> = (<strong>k</strong><sub>1</sub>
+    OR <strong>d</strong>) AND (<strong>k</strong><sub>2</sub> OR
+    <strong>d</strong>) AND ... AND (<strong>k</strong><sub><em>n</em></sub>
+    OR <strong>d</strong>) =<br>
+    <br>
+    (<strong>k</strong><sub>1</sub> OR (<strong>d</strong><sub>1</sub>
+    OR <strong>d</strong><sub>2</sub> OR ... OR <strong>d</strong><sub><em>n</em></sub>))<br>
+    (<strong>k</strong><sub>2</sub> OR (<strong>d</strong><sub>1</sub>
+    OR <strong>d</strong><sub>2</sub> OR ... OR <strong>d</strong><sub><em>n</em></sub>))<br>
+    ---/---/---/---<br>
+    (<strong>k</strong><sub><em>n</em></sub> OR (<strong>d</strong><sub>1</sub>
+    OR <strong>d</strong><sub>2</sub> OR ... OR <strong>d</strong><sub><em>n</em></sub>))
+    =<br>
+    <br>
+    (<strong>k</strong><sub>1</sub> OR <strong>d</strong><sub>1</sub>)
+    OR <strong>d</strong><sub>2</sub> OR ... OR <strong>d</strong><sub><em>n</em></sub>)<br>
+    (<strong>d</strong><sub>1</sub> OR (<strong>k</strong><sub>2</sub>
+    OR <strong>d</strong><sub>2</sub>) ... OR <strong>d</strong><sub><em>n</em></sub>)<br>
+    ---/---/---/---<br>
+    (<strong>d</strong><sub>1</sub> OR <strong>d</strong><sub>2</sub>
+    OR ... OR <strong>(k</strong><sub><em>n</em></sub> OR <strong>d</strong><sub><em>n</em></sub>))
+    </p>
+</blockquote>
+
+<p>and in general case <i>n </i>new disjunctions are generated
+from one source disjunction. Each new disjunction is generated
+from the source one by applying the elementary induction, i.e.,
+by increasing one component. </p>
+
+<p>If <strong>k</strong> is covered by <strong>d</strong> then
+its addition to <strong>d</strong> does not change the semantics:
+<strong>k</strong> OR <strong>d</strong> = <strong>d</strong>. In
+this case the disjunction can be simply copied to the new matrix
+with no modifications. Thus the whole set of new disjunctions can
+be divided into two subsets: modified and non-modified. </p>
+
+<p>For example, let us suppose that we have two conjunctions <strong>k</strong><sup>1</sup>
+= 05.005.0005 and <strong>k</strong><sup>2</sup> = 03.003.0030
+which have to be transformed into disjunctions. Each new matrix
+is obtained from the previous one as follows: <strong>D</strong><sup><em>i</em></sup>
+= <strong>D</strong><sup><em>i</em>-1</sup> OR <strong>k</strong><sup><em>i</em></sup>,
+where <em>i</em>=1,2, and <strong>D</strong><sup>0</sup> = <strong>d</strong><sup>0</sup>
+= 00.000.0000. Thus after processing the first conjunction we
+obtain: </p>
+<div align="center"><center>
+
+<table border="0" cellpadding="2" cellspacing="0">
+    <tr>
+        <td rowspan="3" nowrap><b>D</b><sup>1</sup><b> =&nbsp;D</b><sup>0</sup>
+        OR <strong>k</strong><sup>1</sup> = 00.000.0000 OR 05.005.0005
+        = </td>
+        <td background="wsc4_MatrixBorder.gif" nowrap>&nbsp;</td>
+        <td nowrap>0<u>5</u></td>
+        <td nowrap>000</td>
+        <td nowrap>0000</td>
+        <td background="wsc4_MatrixBorder.gif" nowrap>&nbsp;</td>
+        <td nowrap><strong>1</strong></td>
+    </tr>
+    <tr>
+        <td background="wsc4_MatrixBorder.gif" nowrap>&nbsp;</td>
+        <td nowrap>00</td>
+        <td nowrap>00<u>5</u></td>
+        <td nowrap>0000</td>
+        <td background="wsc4_MatrixBorder.gif" nowrap>&nbsp;</td>
+        <td nowrap><strong>2</strong></td>
+    </tr>
+    <tr>
+        <td background="wsc4_MatrixBorder.gif" nowrap>&nbsp;</td>
+        <td nowrap>00</td>
+        <td nowrap>000</td>
+        <td nowrap>000<u>5</u></td>
+        <td background="wsc4_MatrixBorder.gif" nowrap>&nbsp;</td>
+        <td nowrap><strong>3</strong></td>
+    </tr>
+</table>
+</center></div>
+
+<p>where increased components (to which elementary induction has
+been applied) are underlined and three resulted disjunctions are
+denoted with bold numbers. After processing the second
+conjunction we obtain: </p>
+<div align="center"><center>
+
+<table border="0" cellpadding="2" cellspacing="0">
+    <tr>
+        <td rowspan="5" nowrap><b>D</b><sup>2</sup><b> =&nbsp;D</b><sup>1</sup>
+        OR <strong>k</strong><sup>2</sup> = </td>
+        <td nowrap>&nbsp;</td>
+        <td nowrap>&nbsp;</td>
+        <td nowrap>&nbsp;</td>
+        <td nowrap>&nbsp;</td>
+        <td nowrap>&nbsp;</td>
+        <td rowspan="5" nowrap>OR 03.003.0030 = </td>
+        <td background="wsc4_MatrixBorder.gif" nowrap>&nbsp;</td>
+        <td nowrap>05</td>
+        <td nowrap>000</td>
+        <td nowrap>0000</td>
+        <td background="wsc4_MatrixBorder.gif" nowrap>&nbsp;</td>
+        <td nowrap><strong>1</strong></td>
+    </tr>
+    <tr>
+        <td background="wsc4_MatrixBorder.gif" nowrap>&nbsp;</td>
+        <td nowrap>05</td>
+        <td nowrap>000</td>
+        <td nowrap>0000</td>
+        <td background="wsc4_MatrixBorder.gif" nowrap>&nbsp;</td>
+        <td background="wsc4_MatrixBorder.gif" nowrap>&nbsp;</td>
+        <td nowrap>00</td>
+        <td nowrap>005</td>
+        <td nowrap>0000</td>
+        <td background="wsc4_MatrixBorder.gif" nowrap>&nbsp;</td>
+        <td nowrap><strong>2</strong></td>
+    </tr>
+    <tr>
+        <td background="wsc4_MatrixBorder.gif" nowrap>&nbsp;</td>
+        <td nowrap>00</td>
+        <td nowrap>005</td>
+        <td nowrap>0000</td>
+        <td background="wsc4_MatrixBorder.gif" nowrap>&nbsp;</td>
+        <td background="wsc4_MatrixBorder.gif" nowrap>&nbsp;</td>
+        <td nowrap>0<u>3</u></td>
+        <td nowrap>000</td>
+        <td nowrap>0005</td>
+        <td background="wsc4_MatrixBorder.gif" nowrap>&nbsp;</td>
+        <td nowrap><strong>3.1</strong></td>
+    </tr>
+    <tr>
+        <td background="wsc4_MatrixBorder.gif" nowrap>&nbsp;</td>
+        <td nowrap>00</td>
+        <td nowrap>000</td>
+        <td nowrap>0005</td>
+        <td background="wsc4_MatrixBorder.gif" nowrap>&nbsp;</td>
+        <td background="wsc4_MatrixBorder.gif" nowrap>&nbsp;</td>
+        <td nowrap>00</td>
+        <td nowrap>00<u>3</u></td>
+        <td nowrap>0005</td>
+        <td background="wsc4_MatrixBorder.gif" nowrap>&nbsp;</td>
+        <td nowrap><strong>3.2</strong></td>
+    </tr>
+    <tr>
+        <td nowrap>&nbsp;</td>
+        <td nowrap>&nbsp;</td>
+        <td nowrap>&nbsp;</td>
+        <td nowrap>&nbsp;</td>
+        <td nowrap>&nbsp;</td>
+        <td background="wsc4_MatrixBorder.gif" nowrap>&nbsp;</td>
+        <td nowrap>00</td>
+        <td nowrap>000</td>
+        <td nowrap>00<u>3</u>5</td>
+        <td background="wsc4_MatrixBorder.gif" nowrap>&nbsp;</td>
+        <td nowrap><strong>3.3</strong></td>
+    </tr>
+</table>
+</center></div>
+
+<p>where for convenience we separate the lines produced by
+different parents. Note that the disjunctions <b>1</b> and <b>2</b>
+are not modified since they cover <strong>k</strong><sup>2</sup>
+and only three new disjunctions <b>3.1</b>, <b>3.2</b>, and <b>3.3</b>
+have been generated from their parent <b>3</b>. </p>
+
+<h3>3.2. Absorption of Disjunctions </h3>
+
+<p>As new disjunctions are generated and added to the new matrix
+the absorption procedure should be carried out to remove weak
+lines, i.e., the lines which are not prime and follow from others.
+In general, each new disjunction can either be absorbed itself or
+absorb other lines. Thus the comparison of lines has to be
+fulfilled in both directions. To check for the consequence
+relation between two disjunctions we have to reduce them (see [9]
+for more information about reduced forms) and then compare all
+their components. </p>
+
+<p>For example, if we add new conjunction <strong>k</strong><sup>3</sup>
+= 05.005.0500 to the matrix <strong>D</strong><sup>2</sup> (section
+3.1) then we obtain </p>
+<div align="center"><center>
+
+<table border="0" cellpadding="2" cellspacing="0">
+    <tr>
+        <td rowspan="11" nowrap><b>D</b><sup>3</sup><b> =&nbsp;D</b><sup>2</sup>
+        OR <strong>k</strong><sup>3</sup> = </td>
+        <td nowrap>&nbsp;</td>
+        <td nowrap>&nbsp;</td>
+        <td nowrap>&nbsp;</td>
+        <td nowrap>&nbsp;</td>
+        <td nowrap>&nbsp;</td>
+        <td rowspan="11" nowrap>OR 05.005.0500 = </td>
+        <td background="wsc4_MatrixBorder.gif" nowrap>&nbsp;</td>
+        <td nowrap>05</td>
+        <td nowrap>000</td>
+        <td nowrap>0000</td>
+        <td background="wsc4_MatrixBorder.gif" nowrap>&nbsp;</td>
+        <td nowrap><strong>1</strong></td>
+    </tr>
+    <tr>
+        <td nowrap>&nbsp;</td>
+        <td nowrap>&nbsp;</td>
+        <td nowrap>&nbsp;</td>
+        <td nowrap>&nbsp;</td>
+        <td nowrap>&nbsp;</td>
+        <td background="wsc4_MatrixBorder.gif" nowrap>&nbsp;</td>
+        <td nowrap>00</td>
+        <td nowrap>005</td>
+        <td nowrap>0000</td>
+        <td background="wsc4_MatrixBorder.gif" nowrap>&nbsp;</td>
+        <td nowrap>2</td>
+    </tr>
+    <tr>
+        <td nowrap>&nbsp;</td>
+        <td nowrap>&nbsp;</td>
+        <td nowrap>&nbsp;</td>
+        <td nowrap>&nbsp;</td>
+        <td nowrap>&nbsp;</td>
+        <td background="wsc4_MatrixBorder.gif" nowrap>&nbsp;</td>
+        <td nowrap>0<u>5</u></td>
+        <td nowrap>000</td>
+        <td nowrap>0005</td>
+        <td background="wsc4_MatrixBorder.gif" nowrap>&nbsp;</td>
+        <td nowrap><strong>3.1.1</strong> |= <strong>1</strong></td>
+    </tr>
+    <tr>
+        <td background="wsc4_MatrixBorder.gif" nowrap>&nbsp;</td>
+        <td nowrap>05</td>
+        <td nowrap>000</td>
+        <td nowrap>0000</td>
+        <td background="wsc4_MatrixBorder.gif" nowrap>&nbsp;</td>
+        <td background="wsc4_MatrixBorder.gif" nowrap>&nbsp;</td>
+        <td nowrap>03</td>
+        <td nowrap>00<u>5</u></td>
+        <td nowrap>0005</td>
+        <td background="wsc4_MatrixBorder.gif" nowrap>&nbsp;</td>
+        <td nowrap><strong>3.1.2</strong> |= <strong>2</strong></td>
+    </tr>
+    <tr>
+        <td background="wsc4_MatrixBorder.gif" nowrap>&nbsp;</td>
+        <td nowrap>05</td>
+        <td nowrap>005</td>
+        <td nowrap>0000</td>
+        <td background="wsc4_MatrixBorder.gif" nowrap>&nbsp;</td>
+        <td background="wsc4_MatrixBorder.gif" nowrap>&nbsp;</td>
+        <td nowrap>03</td>
+        <td nowrap>000</td>
+        <td nowrap>0<u>5</u>05</td>
+        <td background="wsc4_MatrixBorder.gif" nowrap>&nbsp;</td>
+        <td nowrap><strong>3.1.3</strong></td>
+    </tr>
+    <tr>
+        <td background="wsc4_MatrixBorder.gif" nowrap>&nbsp;</td>
+        <td nowrap>03</td>
+        <td nowrap>000</td>
+        <td nowrap>0005</td>
+        <td background="wsc4_MatrixBorder.gif" nowrap>&nbsp;</td>
+        <td background="wsc4_MatrixBorder.gif" nowrap>&nbsp;</td>
+        <td nowrap>0<u>5</u></td>
+        <td nowrap>003</td>
+        <td nowrap>0005</td>
+        <td background="wsc4_MatrixBorder.gif" nowrap>&nbsp;</td>
+        <td nowrap><strong>3.2.1</strong> |= <strong>1</strong></td>
+    </tr>
+    <tr>
+        <td background="wsc4_MatrixBorder.gif" nowrap>&nbsp;</td>
+        <td nowrap>00</td>
+        <td nowrap>003</td>
+        <td nowrap>0005</td>
+        <td background="wsc4_MatrixBorder.gif" nowrap>&nbsp;</td>
+        <td background="wsc4_MatrixBorder.gif" nowrap>&nbsp;</td>
+        <td nowrap>00</td>
+        <td nowrap>00<u>5</u></td>
+        <td nowrap>0005</td>
+        <td background="wsc4_MatrixBorder.gif" nowrap>&nbsp;</td>
+        <td nowrap><strong>3.2.2</strong> |= <strong>2</strong></td>
+    </tr>
+    <tr>
+        <td background="wsc4_MatrixBorder.gif" nowrap>&nbsp;</td>
+        <td nowrap>00</td>
+        <td nowrap>000</td>
+        <td nowrap>0035</td>
+        <td background="wsc4_MatrixBorder.gif" nowrap>&nbsp;</td>
+        <td background="wsc4_MatrixBorder.gif" nowrap>&nbsp;</td>
+        <td nowrap>00</td>
+        <td nowrap>003</td>
+        <td nowrap>0<u>5</u>05</td>
+        <td background="wsc4_MatrixBorder.gif" nowrap>&nbsp;</td>
+        <td nowrap><strong>3.2.3</strong></td>
+    </tr>
+    <tr>
+        <td nowrap>&nbsp;</td>
+        <td nowrap>&nbsp;</td>
+        <td nowrap>&nbsp;</td>
+        <td nowrap>&nbsp;</td>
+        <td nowrap>&nbsp;</td>
+        <td background="wsc4_MatrixBorder.gif" nowrap>&nbsp;</td>
+        <td nowrap>0<u>5</u></td>
+        <td nowrap>000</td>
+        <td nowrap>0035</td>
+        <td background="wsc4_MatrixBorder.gif" nowrap>&nbsp;</td>
+        <td nowrap><strong>3.3.1</strong> |= <strong>1</strong></td>
+    </tr>
+    <tr>
+        <td nowrap>&nbsp;</td>
+        <td nowrap>&nbsp;</td>
+        <td nowrap>&nbsp;</td>
+        <td nowrap>&nbsp;</td>
+        <td nowrap>&nbsp;</td>
+        <td background="wsc4_MatrixBorder.gif" nowrap>&nbsp;</td>
+        <td nowrap>00</td>
+        <td nowrap>00<u>5</u></td>
+        <td nowrap>0035</td>
+        <td background="wsc4_MatrixBorder.gif" nowrap>&nbsp;</td>
+        <td nowrap><strong>3.3.2</strong> |= <strong>2</strong></td>
+    </tr>
+    <tr>
+        <td nowrap>&nbsp;</td>
+        <td nowrap>&nbsp;</td>
+        <td nowrap>&nbsp;</td>
+        <td nowrap>&nbsp;</td>
+        <td nowrap>&nbsp;</td>
+        <td background="wsc4_MatrixBorder.gif" nowrap>&nbsp;</td>
+        <td nowrap>00</td>
+        <td nowrap>000</td>
+        <td nowrap>0<u>5</u>35</td>
+        <td background="wsc4_MatrixBorder.gif" nowrap>&nbsp;</td>
+        <td nowrap><strong>3.3.3</strong></td>
+    </tr>
+</table>
+</center></div>
+
+<p>where 6 lines are absorbed and therefore the final matrix is: </p>
+<div align="center"><center>
+
+<table border="0" cellpadding="2" cellspacing="0">
+    <tr>
+        <td rowspan="5" nowrap><b>D</b><sup>3</sup><b> = </b></td>
+        <td background="wsc4_MatrixBorder.gif" nowrap>&nbsp;</td>
+        <td nowrap>05</td>
+        <td nowrap>000</td>
+        <td nowrap>0000</td>
+        <td background="wsc4_MatrixBorder.gif" nowrap>&nbsp;</td>
+        <td nowrap><strong>1</strong></td>
+    </tr>
+    <tr>
+        <td background="wsc4_MatrixBorder.gif" nowrap>&nbsp;</td>
+        <td nowrap>00</td>
+        <td nowrap>005</td>
+        <td nowrap>0000</td>
+        <td background="wsc4_MatrixBorder.gif" nowrap>&nbsp;</td>
+        <td nowrap><strong>2</strong></td>
+    </tr>
+    <tr>
+        <td background="wsc4_MatrixBorder.gif" nowrap>&nbsp;</td>
+        <td nowrap>03</td>
+        <td nowrap>000</td>
+        <td nowrap>0505</td>
+        <td background="wsc4_MatrixBorder.gif" nowrap>&nbsp;</td>
+        <td nowrap><strong>3.1.3</strong></td>
+    </tr>
+    <tr>
+        <td background="wsc4_MatrixBorder.gif" nowrap>&nbsp;</td>
+        <td nowrap>00</td>
+        <td nowrap>003</td>
+        <td nowrap>0505</td>
+        <td background="wsc4_MatrixBorder.gif" nowrap>&nbsp;</td>
+        <td nowrap><strong>3.2.3</strong></td>
+    </tr>
+    <tr>
+        <td background="wsc4_MatrixBorder.gif" nowrap>&nbsp;</td>
+        <td nowrap>00</td>
+        <td nowrap>000</td>
+        <td nowrap>0535</td>
+        <td background="wsc4_MatrixBorder.gif" nowrap>&nbsp;</td>
+        <td nowrap><strong>3.3.3</strong></td>
+    </tr>
+</table>
+</center></div>
+
+<p>Several properties, which are formulated below, significantly
+simplify the absorption process. </p>
+
+<p><u>Property&nbsp;1.</u> The disjunctions, which cover the
+current conjunction and hence are not modified, cannot be
+absorbed by any other disjunction. </p>
+
+<p>This property follows from the fact that the matrix of
+disjunctions is always maintained in the state where it contains
+only prime disjunctions, which do not absorb each other. Hence if
+some disjunction has not been absorbed earlier then without
+modifications it will not be absorbed in new matrix as well since
+this new matrix contains only the same or weaker disjunctions. </p>
+
+<p>Let us suppose that <strong>u</strong> is non-modified
+disjunction while <strong>v</strong> was modified on the
+component <strong>v</strong><sub><em>rs</em></sub>, and <strong>v</strong><em>'</em><sub><em>rs</em></sub>
+is old value of the modified component (<strong>u</strong><sub><em>ij</em></sub>
+= <strong>u</strong><em>'</em><sub><em>ij</em></sub> since <strong>u</strong>
+was not modified). Then the following property takes place. </p>
+
+<p><u>Property&nbsp;2.</u> If <strong>u</strong><sub><em>rs</em></sub>
+&lt;= <strong>v</strong><em>'</em><sub><em>rs</em></sub> then <strong>v</strong>
+does not follow from <strong>u</strong>. (This property is valid
+only if the constant of <strong>v</strong> has not been changed.
+More about constants and reduced forms read in [9].) </p>
+
+<p>To use this property each line has to store information on the
+old value <strong>v</strong><em>'</em><sub><em>rs</em></sub> of
+modified component and its number (<i>r </i>and <i>s</i>). There
+are analogous properties for comparing two modified disjunctions
+but they are not formulated here since they are a little more
+complicated and have several different cases. These properties
+are valuable since frequently they allow us to say that one line
+is not consequence of another by comparing only one pair of
+components. </p>
+
+<p><u>Property&nbsp;3.</u> If the sum of components in <strong>v</strong>
+or in any of its sections <strong>v</strong><sub><em>i</em></sub>
+is less then the corresponding sum in the disjunction <strong>u</strong>
+then <strong>v</strong> does not follow from <strong>u</strong>. </p>
+
+<p>To use this property we have to maintain the sums of the
+vector and section components in the corresponding headers. If
+all these necessary conditions are satisfied then we have to
+carry out a component-wise comparison of two vectors in the loop
+consisting of <em>n</em><sub>1</sub>+<em>n</em><sub>2</sub>+...+<em>n</em><sub><em>n</em></sub>
+steps. </p>
+
+<h3>3.3. Filtration of Disjunctions </h3>
+
+<p>In spite of using various methods to increase the performance
+of the transformation from DNF into CNF, it remains too
+computationally difficult for real world problems. However for
+the task of rule induction it is not necessary to carry out this
+transformation in complete form since usually it is required to
+find only the strongest dependencies among the attributes.
+Therefore the algorithm has been modified so that the number of
+lines in the matrix of prime disjunctions is limited by a special
+parameter while the lines themselves are ordered by a criterion
+of interestingness. Thus only a limited number of the most
+interesting disjunctions are stored and processed whereas those
+disjunctions, which according to their criterion do not go into
+it, are removed. </p>
+
+<p>The procedure is organised as follows. Before a new
+disjunction is to be generated we calculate its criterion value (the
+degree of interestingness) which is compared with that of the
+last line of the matrix. If the new disjunction does not go into
+the matrix, it is simply not generated. Otherwise, if it is
+interesting enough, it is first generated, then checked for
+absorption, and finally inserted into the corresponding position
+in the matrix (the last line is removed). </p>
+
+<p>There may be different criteria of pattern ordering
+determining the induction process direction. The Optimist
+algorithm uses the criterion of interestingness in the form of
+the impossibility interval size. Informally, the more points of
+the distribution have smaller values, the more general and strong
+the corresponding disjunction is. Formally the following formula
+is used to calculate this parameter: </p>
+
+<blockquote>
+    <p><em>H</em> = (1/<em>n</em><sub>1</sub>) sum(<strong>d</strong><sub>1<em>j</em></sub>)
+    + (1/<em>n</em><sub>2</sub>) sum(<strong>d</strong><sub>2<em>j</em></sub>)
+    + ... + (1/<em>n</em><sub><em>n</em></sub>) sum(<strong>d</strong><sub><em>nj</em></sub>)</p>
+</blockquote>
+
+<p>according to which <i>H</i> is equal to the weighted sum of
+components, and the less this value the stronger the disjunction.
+In particular, in boolean case changing one component from 0 to 1
+in two-valued section is equivalent to changing three components
+from 0 to 1 in six-valued section. For example, in the matrix <strong>D</strong><sub>3</sub>
+(section&nbsp;3.2) two disjunctions <b>3.1.3</b> and <b>3.2.3</b>
+can be transformed into rules (three other disjunctions are
+degenerated and represent the distribution projection on
+individual variables). However, the second of them is more
+interesting (informative) since it has larger interval of
+impossibility: </p>
+
+<blockquote>
+    <p><em>H</em>(<b>3.1.3</b>) = (1/2)3 + (1/3)0 + (1/4)10 = 4
+    &gt; 3.5 = (1/2)0 + (1/3)3 + (1/4)10 = <em>H</em>(<b>3.2.3</b>)</p>
+</blockquote>
+
+<p>Generally, each attribute or even each attribute value may
+have their own user-defined weights, which reflect their
+informative importance or subjective interestingness for the user.
+This mechanism provides the capability of more flexible control
+over the process of rule induction. There may be also other
+mechanisms of filtration. For example, restricting the number of
+non-0 components for the target attribute allows us to find only
+the rules with one value in conclusion and set-valued conditions.
+</p>
+
+<h2>4. Transformation of Disjunctions into Rules </h2>
+
+<p>The transformation from DNF into CNF is the most difficult
+part of the algorithm, and once the prime disjunctions have been
+generated they can be used to build the possibilistic set-valued
+rules. Formally, rules are obtained in the conventional way by
+negating the propositions (sections) which should be in the
+condition and thus obtaining an implication, for example: </p>
+
+<blockquote>
+    <p><strong>d</strong><sub>1</sub> OR <strong>d</strong><sub>3</sub>
+    OR <strong>d</strong><sub>5</sub> &lt;=&gt; <strong>~d</strong><sub>1</sub>
+    AND ~<strong>d</strong><sub>3</sub> -&gt; <strong>d</strong><sub>5</sub>
+    </p>
+</blockquote>
+
+<p>The sections, which consist of all 0&#146;s, should not be
+considered since they are equivalent to the absence of
+proposition about the corresponding attribute. The only problem
+here is that it is more desirable to have crisp conditions
+instead of possibilistic ones resulted from the negation. Thus we
+need a mechanism for a meaningful removing uncertainty from the
+negated sections. </p>
+
+<p>Let us suppose that <strong>d</strong><sub>min</sub> = max<sub><em>i</em></sub>
+min<sub><em>j</em></sub> <strong>d</strong><sub><em>ij</em></sub>,
+and <strong>d</strong><sub>max</sub> = max<sub><em>ij</em></sub> <strong>d</strong><sub><em>ij</em></sub>
+are minimal and maximal components of the disjunction,
+respectively. The maximal component is the same for all
+disjunctions (1 when mapped into the [0,1] interval). The most
+straightforward way is to negate the section <strong>d</strong><sub><em>i</em></sub>
+as follows: </p>
+
+<blockquote>
+    <p><strong>d</strong><sub><em>ij</em></sub> = <strong>d</strong><sub>max</sub>
+    if <strong>d</strong><sub><em>ij</em></sub> &lt;= <strong>d</strong><sub>min</sub>,
+    and <strong>d</strong><sub><em>ij</em></sub> = <strong>d</strong><sub>min</sub>
+    otherwise</p>
+</blockquote>
+
+<p>i.e., all components, which are greater than the disjunction
+constant <strong>d</strong><sub>min</sub>, are mapped into <strong>d</strong><sub>min</sub>
+while only the components, which are less than or equal to <strong>d</strong><sub>min</sub>,
+are included into the condition. For example, the disjunction <strong>d</strong>
+= {0,1} OR {0,6,0} OR {0,2,9,5} with <strong>d</strong><sub>min</sub>
+= 0 and <strong>d</strong><sub>max</sub> = 9 can be transformed
+into the implication {9,0} AND {9,0,9} -&gt; {0,2,9,5}, which is
+interpreted as the possibilistic rule </p>
+
+<blockquote>
+    <p>IF <em>x</em><sub>1</sub>={<em>a</em><sub>11</sub>} AND <em>x</em><sub>2</sub>={<em>a</em><sub>21</sub>,
+    <em>a</em><sub>23</sub>} THEN <em>x</em><sub>3</sub>={<em>a</em><sub>31</sub>:0,
+    <em>a</em><sub>32</sub>:2, <em>a</em><sub>33</sub>:9, <em>a</em><sub>34</sub>:5}
+    </p>
+</blockquote>
+
+<p>where weights in the conclusion are interpreted in
+possibilistic sense, i.e., they define maximal possible values of
+the distribution within this interval (since we used prime
+disjunction it is guarantied that these values cannot be
+decreased). </p>
+
+<p>Generally, instead of <strong>d</strong><sub>min</sub> we can
+use any user-defined or pattern-dependent (automatically
+calculated) threshold. In the above example, we see that the
+pattern <strong>d</strong> involves a weak section <strong>d</strong><sub>1</sub>,
+i.e., the section with small maximal component (very close to
+trivial). In such cases we can obtain more simple rules by adding
+to the disjunction the maximal component of the weak section so
+that the weak section becomes constant. Then we apply the
+negation to desired sections of this weaker disjunction and in
+our case obtain the implication {9,1,9} -&gt; {1,2,9,5} which is
+interpreted as the rule </p>
+
+<blockquote>
+    <p>IF <em>x</em><sub>2</sub>={<em>a</em><sub>21</sub>, <em>a</em><sub>23</sub>}
+    THEN <em>x</em><sub>3</sub>={<em>a</em><sub>31</sub>:1, <em>a</em><sub>32</sub>:2,
+    <em>a</em><sub>33</sub>:9, <em>a</em><sub>34</sub>:5} </p>
+</blockquote>
+
+<p>Note that this rule is more general on the condition but less
+informative (weaker) on the conclusion. It is important that when
+generating rules in such a way we always loose some information
+and it is why, in particular, different patterns may produce the
+same rules. However, the optimality of the rules in the sense
+that the conclusion cannot be strengthened without weakening the
+condition remains (i.e., maximal frequencies in conclusion are
+exact). </p>
+
+<p>The rules can be easily filled in with statistical information
+in the form of the sum of occurrences within the rule condition
+interval (for one additional pass through the data set). Then we
+might obtain the rule like the following </p>
+
+<blockquote>
+    <p>IF <em>x</em><sub>2</sub>={<em>a</em><sub>21</sub>, <em>a</em><sub>23</sub>}
+    THEN <em>x</em><sub>3</sub>={<em>a</em><sub>31</sub> (Sum=2,
+    Max=1), <em>a</em><sub>32</sub> (Sum=4, Max=2), ...} </p>
+</blockquote>
+
+<p>The Optimist algorithm for the case of multi-valued attributes
+and two-valued semantics has been implemented in the Chelovek for
+Windows 95 rule induction system<sup>*[Developed at the Institute
+of Mathematics and Informatics Moldavian Academy of Sciences]</sup>
+(Fig.&nbsp;3). Since the number of patterns is limited (by a
+special parameter) the procession time is linear to the table
+length. For several hundreds of patterns the procession time per
+record is rather low (less than the overheads such as loading the
+record and parsing the attribute values). When the number of
+patterns exceeds 1000 the combinatorial part becomes significant.
+We also noticed that the algorithm works much better with ordered
+data. </p>
+
+<p align="center"><a href="wsc4_3-big.gif"><font size="2"
+face="Times"><img src="wsc4_3.gif"
+alt="Fig. 3. Screenshot of the Chelovek rule induction system. "
+border="0" width="561" height="421"></font></a></p>
+
+<p align="center"><em><strong>Fig. 3.</strong></em><em>
+Screenshot of the Chelovek rule induction system. </em></p>
+
+<h2>5. Conclusion </h2>
+
+<p>Below we summarise our rule induction algorithm characteristic
+features, advantages and disadvantages. </p>
+
+<ul>
+    <li>The algorithm is based on the <u>original formal
+        framework</u> generalising the conventional boolean
+        approach on the case of (i)&nbsp;finite-valued attributes
+        and (ii)&nbsp;continuous-valued semantics. </li>
+    <li>To build rules the patterns in the form of possibilistic <u>prime
+        disjunctions</u> are used, which represent the widest
+        intervals of impossibility in the multidimensional space
+        of all value combinations. In particular, it allows us to
+        reach <u>optimality</u> of the rules in the sense of
+        maximal generality of condition and specificity of
+        conclusion. </li>
+    <li>The filtration mechanism guarantees finding all the <u>most
+        interesting</u> patterns according to some criterion
+        while too specific ones are not generated. </li>
+    <li>The algorithm is <u>iterative</u> in the sense that it
+        processes all records for one pass through the database. </li>
+    <li>The patterns in the form of possibilistic prime
+        disjunctions as well as rules generated by the algorithm
+        have <u>clear and easily interpretable semantics</u> in
+        the form of possibilistic constraints (upper bound) on
+        the maximal number of observations. </li>
+    <li>All generated possibilistic prime disjunctions have <u>equal
+        rights</u>, i.e., the whole semantics does not depend on
+        the order of disjunctions (as, e.g., in [11]). In
+        particular, the interpretation of each rule is
+        independent of other rules and their order. </li>
+    <li>All attributes have <u>equal rights</u>, particularly, we
+        do not need the target attribute. </li>
+    <li>The knowledge base in the form a set of the most general
+        prime disjunctions is approximately <u>equivalent</u> to
+        the database and therefore can be easily used for
+        prediction purposes. </li>
+    <li>One minus of the algorithm is a large number of generated
+        rules especially for dense distributions with fine
+        surface structure when it tries to reflect all details of
+        the too complex surface (a kind of <u>overfitting</u>).
+        This problem can be solved with the help of a more
+        powerful search and filtration mechanism. </li>
+    <li>For many problem domains it may be more desirable to
+        generate directly probabilistic set-valued patterns
+        rather than possibilistic ones. However, this is a
+        separate highly important and rather difficult problem
+        since we do not have the notions of prime disjunctions,
+        DNF etc. for the probabilistic case. </li>
+</ul>
+
+<h2>References </h2>
+
+<p>[1] R. Agrawal, T. Imielinski, A. Swami. Mining association
+rules between sets of items in large. Proc. of the ACM SIGMOD
+Conference on Management of Data, Washington, D.C., May 1993, 207-216.</p>
+
+<p>[2] R. Agrawal, R. Srikant. Fast Algorithms for Mining
+Association Rules. Proc. of the 20th Int'l Conference on Very
+Large Databases, Santiago, Chile, Sept. 1994.</p>
+
+<p>[3] H. Mannila, H. Toivonen, A.I. Verkamo. Efficient
+algorithms for discovering association rules. In KDD-94: AAAI
+Workshop on Knowledge Discovery in Databases, Seattle, Washington,
+July 1994, 181-192.</p>
+
+<p>[4] A.&nbsp;Savinov. <a
+href="http://www.geocities.com/ResearchTriangle/7220/publicat/wsc3.html">Application
+of multi-dimensional fuzzy analysis to decision making</a>. In:
+Advances in Soft Computing -- Engineering Design and
+Manufacturing. R.&nbsp;Roy, T.&nbsp;Furuhashi and P.K.&nbsp;Chawdhry
+(eds.), Springer-Verlag London, 1999. (<a
+href="http://www.geocities.com/ResearchTriangle/7220/publicat/wsc3.zip">PostScript+WinWord</a>)</p>
+
+<p>[5] J.&nbsp;R.&nbsp;Slagel, C.-L.&nbsp;Chang, and R.&nbsp;C.&nbsp;T.&nbsp;Lee.
+A New Algorithm for Generating Prime Implicants. IEEE Trans. on
+Computers, C-19(4):304&#150;310, 1970. </p>
+
+<p>[6] D.&nbsp;Lin, and Z.&nbsp;M.&nbsp;Kedem. Pincer-Search: A
+New Algorithm for Discovering the Maximum Frequent Set. In Proc.
+of the Sixth European Conf. on Extending Database Technology,
+1998. </p>
+
+<p>[7] R.&nbsp;J.&nbsp;Bayardo Jr. Efficiently Mining Long
+Patterns from Databases. In Proc. of the 1998 SIGMOD Conf. on the
+Management of Data, 1998. </p>
+
+<p>[8] A.D.&nbsp;Zakrevsky, Yu.N.&nbsp;Pechersky and F.V.&nbsp;Frolov.
+DIES -- Expert System for Diagnosis of Technical Objects.
+Preprint of the Institute of Mathematics and Computer Center,
+Academy of Sciences of Moldova, Kishinev, 1988 (in Russian). </p>
+
+<p>[9] A.A.&nbsp;Savinov. Fuzzy Multi-dimensional Analysis and
+Resolution Operation. Computer Sci. J. of Moldova <b>6</b>(3),
+252-285, 1998. (<a
+href="http://www.geocities.com/ResearchTriangle/7220/publicat/csjm98.zip">PostScript</a>)
+</p>
+
+<p>[10] A.&nbsp;Savinov. Forming Knowledge by Examples in Fuzzy
+Finite Predicates. Proc. conf. &quot;Hybrid Intellectual Systems&quot;,
+Part&nbsp;1, Rostov-na-Donu--Terskol, 177&#150;179, 1991 (in
+Russian). </p>
+
+<p>[11] P.&nbsp;Clark and T.&nbsp;Niblett. The CN2 Induction
+Algorithm. Machine Learning <b>3</b>(4):261&#150;283, 1989.</p>
+<img src="/cgi-bin/counter" HEIGHT=1 WIDTH=1>
+</body>
+</html>
