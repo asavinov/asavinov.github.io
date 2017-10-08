@@ -1,11 +1,7 @@
 ---
-title: About Alexandr Savinov
-layout: default
-permalink: /about/
+title: Alexandr Savinov
 redirect_from: "/savinov/"
 ---
-
-# Alexandr Savinov
 
 ## Profiles
 

@@ -1,8 +1,8 @@
 # Site settings
-title: Alexandr Savinov's Home Page
+title: Alexandr Savinov
 highlighter: rouge
 theme: jekyll-theme-slate
-show_downloads: false
+show_downloads: true
 #google_analytics:
 plugins:
   - jekyll-redirect-from
