@@ -1,3 +1,8 @@
+# Site settings
+title: Alexandr Savinov's Home Page
+
+markdown: redcarpet
+pygments: true
 theme: jekyll-theme-slate
 plugins:
   - jekyll-redirect-from
