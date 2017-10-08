@@ -4,15 +4,15 @@ layout: default
 redirect_from: "/savinov/"
 ---
 
-## Profiles
+# About me
 
-#### Academic
+#### Academic profiles
 * ResearchGate: <http://www.researchgate.net/profile/Alexandr_Savinov/>
 * Google Scholar: <http://scholar.google.com/citations?user=sgGY5kEAAAAJ>
 * DBLP: <http://www.informatik.uni-trier.de/~ley/pers/hd/s/Savinov:Alexandr_A=>
 * Microsoft Academic Search: <http://academic.research.microsoft.com/Author/77738/alexandr-savinov>
 
-#### Social
+#### Social profiles
 * LinkedIn: <http://de.linkedin.com/in/alexandrsavinov/>
 * XING: <http://www.xing.com/profile/Alexandr_Savinov>
 * AngelList: <https://angel.co/asavinov>
@@ -20,7 +20,7 @@ redirect_from: "/savinov/"
 * Youtube: <http://www.youtube.com/user/conceptoriented>
 * Slideshare: <http://www.slideshare.net/asavinov/>
 
-## Projects
+# Projects
 
 #### Data Commandr (2013-2016)
 * DataCommandr Engine Java: <https://bitbucket.org/conceptoriented/dc-core>
@@ -35,7 +35,7 @@ redirect_from: "/savinov/"
 * <https://github.com/asavinov/fcalc>
 * <https://github.com/asavinov/FuzzyCalculator>
 
-## Publications
+# Publications
 
 Full list of publications: [PDF](publicat.pdf)
 
