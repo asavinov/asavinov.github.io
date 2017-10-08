@@ -1,5 +1,7 @@
 ---
 title: About Alexandr Savinov
+layout: page
+permalink: /about/
 redirect_from: "/savinov/"
 ---
 
@@ -9,32 +11,32 @@ redirect_from: "/savinov/"
 
 #### Academic
 * ResearchGate: <http://www.researchgate.net/profile/Alexandr_Savinov/>
-* Google Scholar: http://scholar.google.com/citations?user=sgGY5kEAAAAJ
-* DBLP: http://www.informatik.uni-trier.de/~ley/pers/hd/s/Savinov:Alexandr_A=
-* Microsoft Academic Search: http://academic.research.microsoft.com/Author/77738/alexandr-savinov
+* Google Scholar: <http://scholar.google.com/citations?user=sgGY5kEAAAAJ>
+* DBLP: <http://www.informatik.uni-trier.de/~ley/pers/hd/s/Savinov:Alexandr_A=>
+* Microsoft Academic Search: <http://academic.research.microsoft.com/Author/77738/alexandr-savinov>
 
 #### Social
-* LinkedIn: http://de.linkedin.com/in/alexandrsavinov/
-* XING: http://www.xing.com/profile/Alexandr_Savinov
-* AngelList: https://angel.co/asavinov
-* c2: http://c2.com/cgi/wiki?AlexandrSavinov
-* Youtube: http://www.youtube.com/user/conceptoriented
-* Slideshare: http://www.slideshare.net/asavinov/
+* LinkedIn: <http://de.linkedin.com/in/alexandrsavinov/>
+* XING: <http://www.xing.com/profile/Alexandr_Savinov>
+* AngelList: <https://angel.co/asavinov>
+* c2: <http://c2.com/cgi/wiki?AlexandrSavinov>
+* Youtube: <http://www.youtube.com/user/conceptoriented>
+* Slideshare: <http://www.slideshare.net/asavinov/>
 
 ## Projects
 
 #### Data Commandr (2013-2016)
-* DataCommandr Engine Java: https://bitbucket.org/conceptoriented/dc-core
-* DataCommandr Engine C#: https://bitbucket.org/conceptoriented/dce-csharp
-* DataCommandr Application (WPF): https://bitbucket.org/conceptoriented/dc-wpf
+* DataCommandr Engine Java: <https://bitbucket.org/conceptoriented/dc-core>
+* DataCommandr Engine C#: <https://bitbucket.org/conceptoriented/dce-csharp>
+* DataCommandr Application (WPF): <https://bitbucket.org/conceptoriented/dc-wpf>
 
 #### Expert System Shell EDIP (1989-1999)
-* EDIP for Windows: https://github.com/asavinov/EDIP-Windows
-* EDIP for DOS: https://github.com/asavinov/EDIP-DOS
+* EDIP for Windows: <https://github.com/asavinov/EDIP-Windows>
+* EDIP for DOS: <https://github.com/asavinov/EDIP-DOS>
 
 #### Fuzzy Calculator (1989-1999)
-* https://github.com/asavinov/fcalc
-* https://github.com/asavinov/FuzzyCalculator
+* <https://github.com/asavinov/fcalc>
+* <https://github.com/asavinov/FuzzyCalculator>
 
 ## Publications
 
@@ -56,7 +58,7 @@ Full list of publications: [PDF](publicat.pdf)
 
 1. A. Savinov, ConceptMix: Self-Service Analytical Data Integration based on the Concept-Oriented Model, Proc. 3rd International Conference on Data Technologies and Applications ([DATA 2014](http://www.dataconference.org/)), Vienna, Austria, 29-31 August 2014, 78-84. [PDF](publicat/data-2014.pdf), [Slides](publicat/data-2014-slides.pdf)
 
-1. A. Savinov, Concept-oriented model and nested partially ordered sets, Technische Universität Dresden, Technical Report TUD-Fl14-01, March 2014. http://nbn-resolving.de/urn:nbn:de:bsz:14-qucosa-140652
+1. A. Savinov, Concept-oriented model and nested partially ordered sets, Technische Universität Dresden, Technical Report TUD-Fl14-01, March 2014. <http://nbn-resolving.de/urn:nbn:de:bsz:14-qucosa-140652>
 
 1. A. Savinov, [Concept-oriented model](http://www.igi-global.com/chapter/concept-oriented-model/107253), Encyclopedia of Business Analytics and Optimization, J.Wang (Editor), IGI Global, 2014, 502-511. [PDF](publicat/ebao-com-14.pdf)
 
