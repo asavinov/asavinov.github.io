@@ -2,5 +2,7 @@
 title: Alexandr Savinov's Home Page
 highlighter: rouge
 theme: jekyll-theme-slate
+show_downloads: false
+#google_analytics:
 plugins:
   - jekyll-redirect-from
