@@ -1,5 +1,6 @@
 ---
 title: About Alexandr Savinov
+layout: default
 permalink: /about/
 redirect_from: "/savinov/"
 ---

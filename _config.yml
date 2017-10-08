@@ -1,7 +1,6 @@
 # Site settings
 title: Alexandr Savinov's Home Page
-
-pygments: true
+highlighter: rouge
 theme: jekyll-theme-slate
 plugins:
   - jekyll-redirect-from
