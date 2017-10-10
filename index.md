@@ -77,7 +77,7 @@ Full list of publications: [PDF](savinov/publicat.pdf)
 
 1. A. Savinov, [Concepts and Concept-Oriented Programming](http://www.jot.fm/issues/issue_2008_03/article2/), Journal of Object Technology, vol. 7, no. 3, March-April 2008, pp. 91-106. Download: [PDF](http://www.jot.fm/issues/issue_2008_03/article2.pdf)
 
-1. A. Savinov, Grouping and Aggregation in the Concept-Oriented Data Model, Proc. ACM Symposium on Applied Computing (SAC 2006), April 23-27, 2006, Dijon, France, 482-486. Download: [PDF](savinov/publicat/sac-06.pdf), Slides.
+1. A. Savinov, Grouping and Aggregation in the Concept-Oriented Data Model, Proc. ACM Symposium on Applied Computing (SAC 2006), April 23-27, 2006, Dijon, France, 482-486. Download: [PDF](savinov/publicat/sac-06.pdf), [Slides](savinov/publicat/sac-06-slides.pdf)
 
 1. A. Savinov, Hierarchical Multidimensional Modelling in the Concept-Oriented Data Model, Proc. the 3rd international conference on Concept Lattices and Their Applications (CLA'05), Olomouc, Czech Republic, September 2005. 123-134. Download: [PDF](savinov/publicat/cla%2705.pdf) [Slides](savinov/publicat/cla%2705-slides.pdf)
 
