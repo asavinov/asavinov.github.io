@@ -49,7 +49,7 @@ Full list of publications: [PDF](savinov/publicat.pdf)
 
 1. A. Savinov, Joins vs. Links or Relational Join Considered Harmful. International Conference on Internet of Things and Big Data ([IoTBD 2016](http://www.iotbd.org/)), 23-25 April, 2016, Rome, Italy, 362-368. [PDF](savinov/publicat/iotbd-2016_2.pdf)
 
-1. A. Savinov, DataCommandr: Column-Oriented Data Integration, Transformation and Analysis. Internet of Things and Big Data (IoTBD’2016), 339-347, 2016. [PDF](savinov/publicat/iotbd-2016_1.pdf)
+1. A. Savinov, DataCommandr: Column-Oriented Data Integration, Transformation and Analysis. Internet of Things and Big Data ([IoTBD 2016](http://www.iotbd.org/)), 339-347, 2016. [PDF](savinov/publicat/iotbd-2016_1.pdf)
 
 1. A. Savinov, Concept-oriented programming: from classes to concepts and from inheritance to inclusion, Eprint: [arXiv:1501.00720](http://arxiv.org/abs/1501.00720) [cs.PL], 2015. [PDF](savinov/publicat/arxiv_1501_00720.pdf)
 
@@ -77,11 +77,11 @@ Full list of publications: [PDF](savinov/publicat.pdf)
 
 1. A. Savinov, [Concepts and Concept-Oriented Programming](http://www.jot.fm/issues/issue_2008_03/article2/), Journal of Object Technology, vol. 7, no. 3, March-April 2008, pp. 91-106. Download: [PDF](http://www.jot.fm/issues/issue_2008_03/article2.pdf)
 
-1. A. Savinov, Grouping and Aggregation in the Concept-Oriented Data Model, Proc. ACM Symposium on Applied Computing (SAC 2006), April 23-27, 2006, Dijon, France, 482-486. Download: [PDF](publicat/sac-06.pdf), Slides.
+1. A. Savinov, Grouping and Aggregation in the Concept-Oriented Data Model, Proc. ACM Symposium on Applied Computing (SAC 2006), April 23-27, 2006, Dijon, France, 482-486. Download: [PDF](savinov/publicat/sac-06.pdf), Slides.
 
 1. A. Savinov, Hierarchical Multidimensional Modelling in the Concept-Oriented Data Model, Proc. the 3rd international conference on Concept Lattices and Their Applications (CLA'05), Olomouc, Czech Republic, September 2005. 123-134. Download: [PDF](savinov/publicat/cla%2705.pdf) [Slides](savinov/publicat/cla%2705-slides.pdf)
 
-1. May M., Savinov A. SPIN! - an Enterprise Architecture for Data Mining and Visual Analysis of Spatial Data, In: [Visual and Spatial Analysis: Advances in Data Mining, Reasoning, and Problem Solving](http://www.springeronline.com/sgw/cda/frontpage/0,11855,4-40109-22-34830245-0,00.html), B. Kovalerchuk, J. Schwing (eds.), Springer/Kluwer Academic Publishers, 293-317, 2004. The book site is here.
+1. May M., Savinov A. SPIN! - an Enterprise Architecture for Data Mining and Visual Analysis of Spatial Data, In: [Visual and Spatial Analysis: Advances in Data Mining, Reasoning, and Problem Solving](http://www.springer.com/gp/book/9781402029394), B. Kovalerchuk, J. Schwing (eds.), Springer/Kluwer Academic Publishers, 293-317, 2004. The book site is here.
 
 1. Savinov A. Mining Dependence Rules by Finding Largest Itemset Support Quota. ACM Symposium on Applied Computing (SAC 2004), March 14-17, 2004, Nicosia, Cyprus, 525-529. [PDF](savinov/publicat/sac-04.pdf) 
 
