@@ -81,7 +81,7 @@ Full list of publications: [PDF](savinov/publicat.pdf)
 
 1. A. Savinov, Hierarchical Multidimensional Modelling in the Concept-Oriented Data Model, Proc. the 3rd international conference on Concept Lattices and Their Applications (CLA'05), Olomouc, Czech Republic, September 2005. 123-134. Download: [PDF](savinov/publicat/cla%2705.pdf) [Slides](savinov/publicat/cla%2705-slides.pdf)
 
-1. May M., Savinov A. SPIN! - an Enterprise Architecture for Data Mining and Visual Analysis of Spatial Data, In: [Visual and Spatial Analysis: Advances in Data Mining, Reasoning, and Problem Solving](http://www.springer.com/gp/book/9781402029394), B. Kovalerchuk, J. Schwing (eds.), Springer/Kluwer Academic Publishers, 293-317, 2004. The book site is here.
+1. May M., Savinov A. SPIN! - an Enterprise Architecture for Data Mining and Visual Analysis of Spatial Data, In: [Visual and Spatial Analysis: Advances in Data Mining, Reasoning, and Problem Solving](http://www.springer.com/gp/book/9781402029394), B. Kovalerchuk, J. Schwing (eds.), Springer/Kluwer Academic Publishers, 293-317, 2004.
 
 1. Savinov A. Mining Dependence Rules by Finding Largest Itemset Support Quota. ACM Symposium on Applied Computing (SAC 2004), March 14-17, 2004, Nicosia, Cyprus, 525-529. [PDF](savinov/publicat/sac-04.pdf) 
 
