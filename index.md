@@ -11,6 +11,7 @@ redirect_from: "/savinov/"
 * Google Scholar: <http://scholar.google.com/citations?user=sgGY5kEAAAAJ>
 * DBLP: <http://www.informatik.uni-trier.de/~ley/pers/hd/s/Savinov:Alexandr_A=>
 * Microsoft Academic: <https://academic.microsoft.com/#/profile/asavinov>
+* Researchr: <https://researchr.org/profile/alexandrsavinov>
 
 #### Social profiles
 * LinkedIn: <http://de.linkedin.com/in/alexandrsavinov/>
