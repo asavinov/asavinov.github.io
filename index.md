@@ -6,14 +6,19 @@ redirect_from: "/savinov/"
 
 # About me
 
-#### Academic profiles
-* ResearchGate: <http://www.researchgate.net/profile/Alexandr_Savinov/>
+#### Academic
+* ResearchGate: <http://www.researchgate.net/profile/Alexandr_Savinov>
 * Google Scholar: <http://scholar.google.com/citations?user=sgGY5kEAAAAJ>
 * DBLP: <http://www.informatik.uni-trier.de/~ley/pers/hd/s/Savinov:Alexandr_A=>
 * Microsoft Academic: <https://academic.microsoft.com/#/profile/asavinov>
 * Researchr: <https://researchr.org/profile/alexandrsavinov>
 
-#### Social profiles
+#### Development
+* Openhub: <https://www.openhub.net/accounts/asavinov>
+* Bitbucket: <https://bitbucket.org/asavinov>
+* XING: <https://github.com/asavinov>
+
+#### Social
 * LinkedIn: <http://de.linkedin.com/in/alexandrsavinov/>
 * XING: <http://www.xing.com/profile/Alexandr_Savinov>
 * AngelList: <https://angel.co/asavinov>
