@@ -16,7 +16,7 @@ redirect_from: "/savinov/"
 #### Development
 * Openhub: <https://www.openhub.net/accounts/asavinov>
 * Bitbucket: <https://bitbucket.org/asavinov>
-* XING: <https://github.com/asavinov>
+* Github: <https://github.com/asavinov>
 
 #### Social
 * LinkedIn: <http://de.linkedin.com/in/alexandrsavinov/>
