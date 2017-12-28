@@ -4,6 +4,22 @@ layout: default
 redirect_from: "/savinov/"
 ---
 
+# NEW
+
+#### Forthcoming publications
+
+I. Cramer, P. Govindarajan, A. Thirugnana, A. Savinov, M. Martin, A. Shekhawat, A. Staerk, Detecting Anomalies in Device Event Data in the IoT. Internet of Things, Big Data and Security ([IoTBDS 2018](http://www.iotbds.org/)), 19-21 March, 2018, Funchal, Madeira - Portugal.
+
+#### Bistro: novel column-oriented data processing engine
+
+*Bistro* is a light-weight column-oriented data processing engine which changes the way data is being processed. It is based on a new data model and is an alternative to conventional SQL-like languages, map-reduce and other set-oriented approaches. Bistro can be applied to many problems like data integration, data migration, extract-transform-load (ETL), big data processing, stream analytics, big data processing, IoT analytics.
+
+Project repository: <https://github.com/asavinov/bistro>
+
+#### Data Commandr
+
+Web application: <http://conceptoriented.com>
+
 # About me
 
 #### Academic
@@ -29,9 +45,9 @@ redirect_from: "/savinov/"
 # Projects
 
 #### Data Commandr (2013-2016)
-* DataCommandr Engine Java: <https://bitbucket.org/conceptoriented/dc-core>
-* DataCommandr Engine C#: <https://bitbucket.org/conceptoriented/dce-csharp>
-* DataCommandr Application (WPF): <https://bitbucket.org/conceptoriented/dc-wpf>
+* DataCommandr Engine Java: <https://bitbucket.org/asavinov/dc-core>
+* DataCommandr Engine C#: <https://bitbucket.org/asavinov/dce-csharp>
+* DataCommandr Application (WPF): <https://bitbucket.org/asavinov/dc-wpf>
 
 #### Expert System Shell EDIP (1989-1999)
 * EDIP for Windows: <https://github.com/asavinov/EDIP-Windows>
@@ -44,8 +60,6 @@ redirect_from: "/savinov/"
 # Publications
 
 Full list of publications: [PDF](savinov/publicat.pdf)
-
-#### Forthcoming publications
 
 #### Recent publications
 
