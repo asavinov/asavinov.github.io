@@ -19,7 +19,7 @@ I. Cramer, P. Govindarajan, A. Thirugnana, A. Savinov, M. Martin, A. Shekhawat, 
 
 Project repository: <https://github.com/asavinov/bistro>
 
-#### Data Commandr
+#### Data Commandr: a self-service tool for data wrangling
 
 *Data Commandr* is a self-service tool created with a single mission: radically simplify and democratize all kinds of operations with data. Its goal is to make complex operations with data tables as easy as working with classical spreadsheets for producing reports, data integration, data migration and other data wrangling tasks. Its main distinguishing feature is that it does not use traditional (set-oriented) queries but instead relies on *column formulas* to derive new data.
 
