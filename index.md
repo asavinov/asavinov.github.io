@@ -7,7 +7,7 @@ redirect_from: "/blogs/"
 redirect_from: "/forums/"
 ---
 
-# NEW
+# News
 
 #### Forthcoming publications
 
