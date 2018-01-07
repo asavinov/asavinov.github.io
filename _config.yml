@@ -5,11 +5,19 @@ author: Alexandr Savinov
 twitter_username: asavinov
 github_username:  asavinov
 
+url: http://conceptoriented.org
+
 # Build settings
 theme: jekyll-theme-slate
-# conceptoriented.org Google Analytics
-google_analytics: UA-43712358-2
 #show_downloads: true
 #highlighter: rouge
+
+# List of links in the navigation bar
+navbar-links:
+  About Me: "aboutme"
+
+# conceptoriented.org Google Analytics
+google_analytics: UA-43712358-2
+
 plugins:
   - jekyll-redirect-from
