@@ -1,10 +1,11 @@
 ---
 title: Alexandr Savinov
 layout: default
-redirect_from: "/savinov/"
-redirect_from: "/wiki/"
-redirect_from: "/blogs/"
-redirect_from: "/forums/"
+redirect_from:
+  - /savinov/
+  - /wiki/
+  - /blogs/
+  - /forums/
 ---
 
 # News
