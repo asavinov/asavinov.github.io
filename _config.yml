@@ -1,8 +1,15 @@
 # Site settings
-title: Alexandr Savinov
+title: Alexandr Savinov - Data Commander
+author: Alexandr Savinov
+
+twitter_username: asavinov
+github_username:  asavinov
+
+# Build settings
 theme: jekyll-theme-slate
+# conceptoriented.org Google Analytics
+google_analytics: UA-43712358-2
 #show_downloads: true
-#google_analytics:
 #highlighter: rouge
 plugins:
   - jekyll-redirect-from

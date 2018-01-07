@@ -2,6 +2,9 @@
 title: Alexandr Savinov
 layout: default
 redirect_from: "/savinov/"
+redirect_from: "/wiki/"
+redirect_from: "/blogs/"
+redirect_from: "/forums/"
 ---
 
 # NEW
@@ -10,13 +13,15 @@ redirect_from: "/savinov/"
 
 I. Cramer, P. Govindarajan, A. Thirugnana, A. Savinov, M. Martin, A. Shekhawat, A. Staerk, Detecting Anomalies in Device Event Data in the IoT. Internet of Things, Big Data and Security ([IoTBDS 2018](http://www.iotbds.org/)), 19-21 March, 2018, Funchal, Madeira - Portugal.
 
-#### Bistro: novel column-oriented data processing engine
+#### Bistro: a novel column-oriented data processing engine
 
 *Bistro* is a light-weight column-oriented data processing engine which changes the way data is being processed. It is based on a new data model and is an alternative to conventional SQL-like languages, map-reduce and other set-oriented approaches. Bistro can be applied to many problems like data integration, data migration, extract-transform-load (ETL), big data processing, stream analytics, big data processing, IoT analytics.
 
 Project repository: <https://github.com/asavinov/bistro>
 
 #### Data Commandr
+
+*Data Commandr* is a self-service tool created with a single mission: radically simplify and democratize all kinds of operations with data. Its goal is to make complex operations with data tables as easy as working with classical spreadsheets for producing reports, data integration, data migration and other data wrangling tasks. Its main distinguishing feature is that it does not use traditional (set-oriented) queries but instead relies on *column formulas* to derive new data.
 
 Web application: <http://conceptoriented.com>
 
@@ -73,7 +78,7 @@ Full list of publications: [PDF](savinov/publicat.pdf)
 
 1. A. Savinov, Concept-oriented programming: from classes to concepts and from inheritance to inclusion, Eprint: [arXiv:1501.00720](http://arxiv.org/abs/1501.00720) [cs.PL], 2015. [PDF](savinov/publicat/arxiv_1501_00720.pdf)
 
-1. A. Savinov, ConceptMix: Self-Service Analytical Data Integration based on the Concept-Oriented Model, Proc. 3rd International Conference on Data Technologies and Applications ([DATA 2014](http://www.dataconference.org/)), Vienna, Austria, 29-31 August 2014, 78-84. [PDF](savinov/publicat/data-2014.pdf), [Slides](savinov/publicat/data-2014-slides.pdf)
+1. A. Savinov, ConceptMix: Self-Service Analytical Data Integration Based on the Concept-Oriented Model, Proc. 3rd International Conference on Data Technologies and Applications ([DATA 2014](http://www.dataconference.org/)), Vienna, Austria, 29-31 August 2014, 78-84. [PDF](savinov/publicat/data-2014.pdf), [Slides](savinov/publicat/data-2014-slides.pdf)
 
 1. A. Savinov, Concept-oriented model and nested partially ordered sets, Technische Universität Dresden, Technical Report TUD-Fl14-01, March 2014. <http://nbn-resolving.de/urn:nbn:de:bsz:14-qucosa-140652>
 
