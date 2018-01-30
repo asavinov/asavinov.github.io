@@ -37,7 +37,6 @@ Web application: <http://conceptoriented.com>
 
 #### Development
 * Openhub: <https://www.openhub.net/accounts/asavinov>
-* Bitbucket: <https://bitbucket.org/asavinov>
 * Github: <https://github.com/asavinov>
 
 #### Social
@@ -50,10 +49,15 @@ Web application: <http://conceptoriented.com>
 
 # Projects
 
+#### Stream Commandr (2016-2017)
+* Stream Commandr Engine: <https://github.com/asavinov/sc-core>
+* Stream Commandr HTTP REST Server: <https://github.com/asavinov/sc-rest>
+* Stream Commandr Web Application (Angular): <https://github.com/asavinov/sc-web>
+
 #### Data Commandr (2013-2016)
-* DataCommandr Engine Java: <https://bitbucket.org/asavinov/dc-core>
-* DataCommandr Engine C#: <https://bitbucket.org/asavinov/dce-csharp>
-* DataCommandr Application (WPF): <https://bitbucket.org/asavinov/dc-wpf>
+* DataCommandr Engine Java: <https://github.com/asavinov/dc-core.git>
+* DataCommandr Engine C#: <https://github.com/asavinov/dce-csharp>
+* DataCommandr Application (WPF): <https://github.com/asavinov/dc-wpf.git>
 
 #### Expert System Shell EDIP (1989-1999)
 * EDIP for Windows: <https://github.com/asavinov/EDIP-Windows>
