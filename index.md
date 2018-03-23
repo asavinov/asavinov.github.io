@@ -12,7 +12,7 @@ redirect_from:
 
 #### Forthcoming publications
 
-I. Cramer, P. Govindarajan, A. Thirugnana, A. Savinov, M. Martin, A. Shekhawat, A. Staerk, Detecting Anomalies in Device Event Data in the IoT. Internet of Things, Big Data and Security ([IoTBDS 2018](http://www.iotbds.org/)), 19-21 March, 2018, Funchal, Madeira - Portugal.
+Concept-oriented model: Modeling and processing data using functions
 
 #### Bistro: a novel column-oriented data processing engine
 
@@ -72,6 +72,8 @@ Web application: <http://conceptoriented.com>
 Full list of publications: [PDF](savinov/publicat.pdf)
 
 #### Recent publications
+
+1. I. Cramer, P. Govindarajan, A. Thirugnana, A. Savinov, M. Martin, A. Shekhawat, A. Staerk, Detecting Anomalies in Device Event Data in the IoT. Internet of Things, Big Data and Security ([IoTBDS 2018](http://www.iotbds.org/)), 19-21 March, 2018, Funchal, Madeira - Portugal, 52-62. [PDF](savinov/publicat/IoTBDS_2018.pdf)
 
 1. A. Savinov, From Group-By to Accumulation: Data Aggregation Revisited. Internet of Things, Big Data and Security ([IoTBDS 2017](http://www.iotbds.org/)), 24-26 April, 2017, Porto, Portugal, 370-379. [PDF](savinov/publicat/IoTBDS_2017_56_CR.pdf)
 
