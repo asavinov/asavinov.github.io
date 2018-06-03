@@ -14,17 +14,14 @@ redirect_from:
 
 Concept-oriented model: Modeling and processing data using functions
 
-#### Bistro: a novel column-oriented data processing engine
+#### Bistro: a new approach to data processing
 
 *Bistro* is a light-weight column-oriented data processing engine which changes the way data is being processed. It is based on a new data model and is an alternative to conventional SQL-like languages, map-reduce and other set-oriented approaches. Bistro can be applied to many problems like data integration, data migration, extract-transform-load (ETL), big data processing, stream analytics, big data processing, IoT analytics.
 
 Project repository: <https://github.com/asavinov/bistro>
-
-#### Data Commandr: a self-service tool for data wrangling
-
-*Data Commandr* is a self-service tool created with a single mission: radically simplify and democratize all kinds of operations with data. Its goal is to make complex operations with data tables as easy as working with classical spreadsheets for producing reports, data integration, data migration and other data wrangling tasks. Its main distinguishing feature is that it does not use traditional (set-oriented) queries but instead relies on *column formulas* to derive new data.
-
-Web application: <http://conceptoriented.com>
+* [Bistro Engine](https://github.com/asavinov/bistro/blob/master/core) - a general-purpose data processing library - very roughly, it is an alternative to MapReduce
+* [Bistro Streams](https://github.com/asavinov/bistro/blob/master/server) - a library for stream analytics (for IoT and edge computing) - very informally, it is an alternative to Kafka Streams
+* [Examples](https://github.com/asavinov/bistro/blob/master/examples) - examples of how to use Bistro Engine and Bistro Streams
 
 # About me
 
