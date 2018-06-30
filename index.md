@@ -10,9 +10,7 @@ redirect_from:
 
 # News
 
-#### Forthcoming publications
-
-Concept-oriented model: Modeling and processing data using functions
+* Understanding Bistro Streams: Counting Clicks by Region: https://dzone.com/articles/understanding-bistro-streams-counting-clicks-by-re
 
 #### Bistro: a new approach to data processing
 
@@ -63,6 +61,10 @@ Project repository: <https://github.com/asavinov/bistro>
 #### Fuzzy Calculator (1989-1999)
 * <https://github.com/asavinov/fcalc>
 * <https://github.com/asavinov/FuzzyCalculator>
+
+# Online articles and posts
+
+* Understanding Bistro Streams: Counting Clicks by Region: https://dzone.com/articles/understanding-bistro-streams-counting-clicks-by-re
 
 # Publications
 
