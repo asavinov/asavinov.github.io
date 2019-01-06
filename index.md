@@ -10,6 +10,12 @@ redirect_from:
 
 # News
 
+#### Lambdo: Feature engineering and machine learning: together at last!
+
+Lambdo is a workflow engine which significantly simplifies data analysis by unifying feature engineering and machine learning operations.
+
+Project repository: <https://github.com/asavinov/lambdo>
+
 #### Bistro: a new approach to data processing
 
 *Bistro* is a light-weight column-oriented data processing engine which changes the way data is being processed. It is based on a new data model and is an alternative to conventional SQL-like languages, map-reduce and other set-oriented approaches. Bistro can be applied to many problems like data integration, data migration, extract-transform-load (ETL), big data processing, stream analytics, big data processing, IoT analytics.
