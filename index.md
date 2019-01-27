@@ -8,25 +8,6 @@ redirect_from:
   - /forums/
 ---
 
-# News
-
-#### Lambdo: Feature engineering and machine learning: together at last!
-
-Lambdo is a workflow engine which significantly simplifies data analysis by unifying feature engineering and machine learning operations.
-
-Project repository: <https://github.com/asavinov/lambdo>
-
-#### Bistro: a new approach to data processing
-
-*Bistro* is a light-weight column-oriented data processing engine which changes the way data is being processed. It is based on a new data model and is an alternative to conventional SQL-like languages, map-reduce and other set-oriented approaches. Bistro can be applied to many problems like data integration, data migration, extract-transform-load (ETL), big data processing, stream analytics, big data processing, IoT analytics.
-
-Project repository: <https://github.com/asavinov/bistro>
-* [Bistro Engine](https://github.com/asavinov/bistro/blob/master/core) - a general-purpose data processing library - very roughly, it is an alternative to MapReduce
-* [Bistro Streams](https://github.com/asavinov/bistro/blob/master/server) - a library for stream analytics (for IoT and edge computing) - very informally, it is an alternative to Kafka Streams
-* [Examples](https://github.com/asavinov/bistro/blob/master/examples) - examples of how to use Bistro Engine and Bistro Streams
-
-Understanding Bistro Streams: Counting Clicks by Region: <https://dzone.com/articles/understanding-bistro-streams-counting-clicks-by-re>
-
 # About me
 
 #### Academic
