@@ -45,6 +45,8 @@ Full list of publications: [PDF](savinov/publicat.pdf)
 
 #### Recent publications
 
+1. A. Savinov, [Concept-oriented model: Modeling and processing data using functions](https://www.researchgate.net/publication/337336089_Concept-oriented_model_Modeling_and_processing_data_using_functions), Eprint: [arXiv:1911.07225](https://arxiv.org/abs/1911.07225) [cs.DB], 2019. [PDF](savinov/publicat/arxiv_1911_07225.pdf)
+
 1. I. Cramer, P. Govindarajan, A. Thirugnana, A. Savinov, M. Martin, A. Shekhawat, A. Staerk, [Detecting Anomalies in Device Event Data in the IoT](https://www.researchgate.net/publication/323971244_Detecting_Anomalies_in_Device_Event_Data_in_the_IoT). Internet of Things, Big Data and Security ([IoTBDS 2018](http://www.iotbds.org/)), 19-21 March, 2018, Funchal, Madeira - Portugal, 52-62. [PDF](savinov/publicat/IoTBDS_2018.pdf)
 
 1. A. Savinov, [From Group-By to Accumulation: Data Aggregation Revisited](https://www.researchgate.net/publication/316551218_From_Group-by_to_Accumulation_Data_Aggregation_Revisited). Internet of Things, Big Data and Security ([IoTBDS 2017](http://www.iotbds.org/)), 24-26 April, 2017, Porto, Portugal, 370-379. [PDF](savinov/publicat/IoTBDS_2017_56_CR.pdf)
