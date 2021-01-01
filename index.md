@@ -2,6 +2,7 @@
 title: Alexandr Savinov
 layout: default
 redirect_from:
+  - /asavinov/
   - /savinov/
   - /wiki/
   - /blogs/
@@ -44,6 +45,8 @@ redirect_from:
 Full list of publications: [PDF](savinov/publicat.pdf)
 
 #### Recent publications
+
+1. A. Savinov, [On the importance of functions in data modeling](https://www.researchgate.net/publication/348079767_On_the_importance_of_functions_in_data_modeling), Eprint: [arXiv:2012.15570](https://arxiv.org/abs/2012.15570) [cs.DB], 2020. [PDF](savinov/publicat/arxiv_2012_15570.pdf)
 
 1. A. Savinov, [Concept-oriented model: Modeling and processing data using functions](https://www.researchgate.net/publication/337336089_Concept-oriented_model_Modeling_and_processing_data_using_functions), Eprint: [arXiv:1911.07225](https://arxiv.org/abs/1911.07225) [cs.DB], 2019. [PDF](savinov/publicat/arxiv_1911_07225.pdf)
 
