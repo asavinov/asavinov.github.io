@@ -19,8 +19,8 @@ redirect_from:
 * Researchr: <https://researchr.org/profile/alexandrsavinov>
 
 ### Online articles
-* Data Processing Using Functions in Prosto: An Alternative to Map-Reduce and SQL https://dzone.com/articles/data-processing-using-functions-in-prosto-an-alter
-* Understanding Bistro Streams: Counting Clicks by Region https://dzone.com/articles/understanding-bistro-streams-counting-clicks-by-re
+* Data Processing Using Functions in Prosto: An Alternative to Map-Reduce and SQL <https://dzone.com/articles/data-processing-using-functions-in-prosto-an-alter>
+* Understanding Bistro Streams: Counting Clicks by Region <https://dzone.com/articles/understanding-bistro-streams-counting-clicks-by-re>
 
 #### Development
 * Openhub: <https://www.openhub.net/accounts/asavinov>
@@ -37,9 +37,9 @@ redirect_from:
 # Projects
 
 #### Concept-oriented model
-* Functions matter! No join-groupby, No map-reduce: https://github.com/asavinov/prosto
-* Feature engineering and machine learning: together at last! https://github.com/asavinov/lambdo
-* A general-purpose data analysis engine radically changing the way batch and stream data is processed https://github.com/asavinov/bistro
+* Functions matter! No join-groupby, No map-reduce: <https://github.com/asavinov/prosto>
+* Feature engineering and machine learning: together at last! <https://github.com/asavinov/lambdo>
+* A general-purpose data analysis engine radically changing the way batch and stream data is processed <https://github.com/asavinov/bistro>
 
 #### Expert System Shell EDIP (1989-1999)
 * EDIP for Windows: <https://github.com/asavinov/EDIP-Windows>
