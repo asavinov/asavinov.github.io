@@ -31,8 +31,6 @@ redirect_from:
 * XING: <http://www.xing.com/profile/Alexandr_Savinov>
 * AngelList: <https://angel.co/asavinov>
 * c2: <http://c2.com/cgi/wiki?AlexandrSavinov>
-* Youtube: <http://www.youtube.com/user/conceptoriented>
-* Slideshare: <http://www.slideshare.net/asavinov/>
 
 # Projects
 
@@ -40,14 +38,6 @@ redirect_from:
 * Functions matter! No join-groupby, No map-reduce: <https://github.com/asavinov/prosto>
 * Feature engineering and machine learning: together at last! <https://github.com/asavinov/lambdo>
 * A general-purpose data analysis engine radically changing the way batch and stream data is processed <https://github.com/asavinov/bistro>
-
-#### Expert System Shell EDIP (1989-1999)
-* EDIP for Windows: <https://github.com/asavinov/EDIP-Windows>
-* EDIP for DOS: <https://github.com/asavinov/EDIP-DOS>
-
-#### Fuzzy Calculator (1989-1999)
-* <https://github.com/asavinov/fcalc>
-* <https://github.com/asavinov/FuzzyCalculator>
 
 # Publications
 
