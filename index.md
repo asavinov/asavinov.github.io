@@ -27,7 +27,7 @@ redirect_from:
 * Github: <https://github.com/asavinov>
 
 #### Social
-* LinkedIn: <http://de.linkedin.com/in/alexandrsavinov/>
+* LinkedIn: <https://linkedin.com/in/alexandrsavinov/>
 * XING: <http://www.xing.com/profile/Alexandr_Savinov>
 * AngelList: <https://angel.co/asavinov>
 * c2: <http://c2.com/cgi/wiki?AlexandrSavinov>
